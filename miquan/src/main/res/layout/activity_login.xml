@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="loginViewModel"
+            type="com.example.miquan.ui.login.LoginViewModel" />
+
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/hu"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:background="@color/colorPrimary"
+            android:elevation="1dp">
+
+            <ImageView
+                android:id="@+id/cs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/cv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:paddingRight="15dp"
+                android:src="@drawable/ic_back"
+                app:click="@{loginViewModel.onBackClick}"
+                android:tint="@color/white"/>
+
+            <TextView
+                android:id="@+id/cu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="手机号快速登录"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/hu"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="17dp"
+            android:background="@drawable/shape_select_image_bg"
+            android:hint="请输入手机号"
+            android:inputType="number"
+            android:maxLength="11"
+            android:paddingBottom="3dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="11dp"
+            android:paddingTop="3dp"
+            android:text="@={loginViewModel.phoneNumber}"
+            android:textColor="#ff000000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/e_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/phone_number"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+            android:text="@{@string/send_nootify_prefix+loginViewModel.phoneNumber+@string/send_nootify_tail}"
+            android:textColor="#ff000000"
+            android:textSize="14sp"
+            android:visibility="@{TextUtils.isEmpty(loginViewModel.phoneNumber)?View.GONE:View.VISIBLE}" />
+
+        <RelativeLayout
+            android:id="@+id/e_8"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_below="@id/e_7"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="13dp">
+
+            <Button
+                android:id="@+id/e_9"
+                android:layout_width="125dp"
+                android:layout_height="48dp"
+                android:layout_alignParentRight="true"
+                android:text="获取验证码"
+                android:textSize="15sp"
+                app:click="@{loginViewModel.getCode}"
+                android:textColor="@{loginViewModel.getCodeClickable?@color/white:@color/button_unclickable_text_color}"
+                android:background="@{loginViewModel.getCodeClickable?@drawable/selector_button_clickable:@drawable/selector_button_unclickable}"/>
+
+            <EditText
+                android:id="@+id/e__"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/e_9"
+                android:background="@drawable/shape_select_image_bg"
+                android:hint="短信验证码"
+                android:inputType="number"
+                android:maxLength="6"
+                android:paddingBottom="3dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="11dp"
+                android:paddingTop="3dp"
+                android:text="@={loginViewModel.smsCode}"
+                android:textColor="#ff000000"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/e_b"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/e_8"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="17dp"
+            android:background="@{TextUtils.isEmpty(loginViewModel.smsCode)?@drawable/selector_button_unclickable:@drawable/selector_button_clickable}"
+            android:clickable="@{!TextUtils.isEmpty(loginViewModel.smsCode)}"
+            android:text="登录"
+            android:textColor="@{TextUtils.isEmpty(loginViewModel.smsCode)?@color/button_unclickable_text_color:@color/white}"
+            android:textSize="16sp"
+            app:click="@{loginViewModel.regsite}" />
+
+        <ProgressBar
+            android:id="@+id/d4x"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_centerInParent="true"
+            android:visibility="@{loginViewModel.loadding?View.VISIBLE:View.GONE}" />
+
+    </RelativeLayout>
+
+</layout>

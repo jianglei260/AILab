@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="buyViewModel"
+            type="com.example.miquan.ui.detail.BuyHintViewModel" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:drawable/screen_background_dark_transparent">
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/shape_dialog_bg"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:background="@drawable/selector_button_clickable"
+                android:text="购买查看更多"
+                android:textColor="@android:color/white"
+                app:click="@{buyViewModel.buyClick}" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/selector_button_clickable"
+                android:text="成为VIP"
+                android:textColor="@android:color/white"
+                app:click="@{buyViewModel.vipClick}" />
+        </LinearLayout>
+    </FrameLayout>
+</layout>

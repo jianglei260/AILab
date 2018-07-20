@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_project"
+            android:icon="@drawable/ic_project"
+            android:title="项目" />
+        <item
+            android:id="@+id/nav_object"
+            android:icon="@drawable/ic_object"
+            android:title="对象" />
+        <item
+            android:id="@+id/nav_layout"
+            android:icon="@drawable/ic_layout"
+            android:title="布局" />
+        <item
+            android:id="@+id/nav_res"
+            android:icon="@drawable/ic_icon"
+            android:title="资源" />
+
+        <item
+            android:id="@+id/nav_api"
+            android:icon="@drawable/ic_api"
+            android:title="API" />
+    </group>
+
+    <item android:title="分享和反馈">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_launcher_foreground"
+                android:title="分享" />
+            <item
+                android:id="@+id/nav_feedback"
+                android:icon="@drawable/ic_launcher_foreground"
+                android:title="意见反馈" />
+        </menu>
+    </item>
+
+</menu>

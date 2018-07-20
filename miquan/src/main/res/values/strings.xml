@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">米圈</string>
+    <string name="load_data_error">加载数据失败</string>
+    <string name="image_size_prefix">/</string>
+    <string name="image_num_prefix">总共</string>
+    <string name="image_num_nail">张图片</string>
+    <string name="send_nootify_prefix">请输入</string>
+    <string name="send_nootify_tail">收到的短信验证码:</string>
+    <string name="error_passwd_too_short">密码长度至少8位</string>
+    <string name="error_phone_number">请输入正确的手机号</string>
+    <string name="timer_notify">s后发送</string>
+    <string name="get_sms_code">获取验证码</string>
+    <string name="error_sms_code">验证码错误</string>
+    <string name="sended_sms_code">发送验证码成功</string>
+    <string name="login_success">登录成功</string>
+    <string name="login_failed">登录失败</string>
+    <string name="check_update_failed">检查更新失败</string>
+    <string name="update_newest_version">您所使用的版本已是最新版本</string>
+    <string name="update_new_version">发现新版本</string>
+    <string name="dialog_sure">确定</string>
+    <string name="update_download">下载新版本</string>
+    <string name="update_cancel">暂不更新</string>
+</resources>

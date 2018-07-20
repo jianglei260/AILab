@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="detailViewModel"
+            type="com.example.miquan.ui.detail.DetailViewModel" />
+
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/header_bar" />
+
+        <RelativeLayout
+            android:id="@+id/header_bar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/colorPrimary">
+
+            <ImageView
+                android:id="@+id/back"
+                style="@style/back_button"
+                app:click="@{detailViewModel.backClick}" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/avata"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/back"
+                android:layout_centerVertical="true"
+                app:imageUri="@{detailViewModel.avataUrl}"
+                app:roundAsCircle="true" />
+
+            <TextView
+                android:layout_width="160dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/avata"
+                android:layout_centerVertical="true"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@{detailViewModel.title}"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_share"
+                android:tint="@color/white"
+                app:click="@{detailViewModel.shareClick}"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

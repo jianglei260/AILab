@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/qmui_config_color_background">
+
+    <RelativeLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <ImageView
+            android:id="@+id/back_image"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/qmui_icon_topbar_back"
+            android:tint="@color/top_bar_close_btn" />
+
+        <com.qmuiteam.qmui.widget.QMUIProgressBar
+            android:id="@+id/rectProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_margin="8dp"
+            android:layout_toRightOf="@id/back_image"
+            android:layout_centerVertical="true"
+            android:textColor="@color/qmui_config_color_white"
+            app:qmui_background_color="@color/qmui_config_color_gray_9"
+            app:qmui_progress_color="@color/colorPrimary"
+            app:qmui_type="type_rect"
+            android:layout_toLeftOf="@id/goal_image"/>
+
+        <ImageView
+            android:id="@+id/goal_image"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/qmui_icon_notify_done"
+            android:tint="@color/qmui_config_color_gray_7"
+            android:layout_margin="8dp"/>
+
+    </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/paper_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/top_bar"/>
+</RelativeLayout>

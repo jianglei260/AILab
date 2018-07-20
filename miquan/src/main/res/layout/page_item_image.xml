@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="itemViewModel"
+            type="com.example.miquan.ui.detail.PageItemViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/c"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="@{itemViewModel.loadfailed?View.VISIBLE:View.GONE}">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="6dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:paddingTop="6dp"
+                android:text="点击重新加载"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:click="@{itemViewModel.reload}" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/a"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <me.relex.photodraweeview.PhotoDraweeView
+                android:id="@+id/b"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                app:onFailureCommand="@{itemViewModel.onFailureCommand}"
+                app:onSuccessCommand="@{itemViewModel.onSuccessCommand}"
+                app:uri="@{itemViewModel.imageUrl}"
+                app:onPhotoTap="@{itemViewModel.switchToolbar}"
+                app:placeholderImageRes="@drawable/ic_load"/>
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/d"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:visibility="@{itemViewModel.loadding?View.VISIBLE:View.GONE}" />
+        </LinearLayout>
+    </FrameLayout>
+</layout>

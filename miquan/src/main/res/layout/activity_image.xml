@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="imageViewModel"
+            type="com.example.miquan.ui.detail.ImageViewModel" />
+        <import type="android.view.View"/>
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/a7"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        app:click="@{imageViewModel.visibleClick}">
+
+        <com.example.miquan.ui.widget.ViewPagerFixed
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:click="@{imageViewModel.visibleClick}"/>
+
+        <RelativeLayout
+            android:id="@+id/a9"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/colorPrimary"
+            android:visibility="@{imageViewModel.titleVisible?View.VISIBLE:View.GONE}">
+
+            <LinearLayout
+                android:id="@+id/a_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <TextSwitcher
+                    android:id="@+id/switcher"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/b_"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/image_size_prefix+imageViewModel.viewModels.size()}"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <ImageView
+                style="@style/back_button"
+                app:click="@{imageViewModel.backClick}" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

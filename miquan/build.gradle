@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+android {
+    compileSdkVersion 27
+
+
+
+    defaultConfig {
+        applicationId "com.example.miquan"
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+    packagingOptions {
+        exclude 'android/databinding/DataBinderMapper.java'
+        exclude 'android/databinding/DataBindingComponent.java'
+        exclude 'android/databinding/DynamicUtil.java'
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.facebook.fresco:fresco:1.3.0'
+    implementation 'me.relex:photodraweeview:1.1.3'
+    implementation 'androidx.core:core-ktx:0.2'
+    implementation "org.jetbrains.anko:anko:$anko_version"
+    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:recyclerview-v7:27.1.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.android.support:cardview-v7:27.1.0'
+    implementation 'com.android.support:design:27.1.0'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7'
+    // CardView-v7
+    compile "org.jetbrains.anko:anko-cardview-v7:$anko_version"
+    compile "org.jetbrains.anko:anko-recyclerview-v7:$anko_version"
+    compile "org.jetbrains.anko:anko-recyclerview-v7-coroutines:$anko_version"
+    compile 'com.kelin.mvvmlight:library:1.0.0'
+    implementation 'com.android.support:palette-v7:27.1.0'
+    implementation files('libs/alipaySingle-20160825.jar')
+    implementation 'cn.bingoogolapple:bga-qrcode-zxing:1.2.1'
+//    implementation 'cn.bingoogolapple:bga-qrcode-zbar:1.2.1'
+}
