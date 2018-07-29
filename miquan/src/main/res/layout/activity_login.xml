@@ -7,7 +7,7 @@
 
         <variable
             name="loginViewModel"
-            type="com.example.miquan.ui.login.LoginViewModel" />
+            type="com.sharevar.miquan.ui.login.LoginViewModel" />
 
         <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
 

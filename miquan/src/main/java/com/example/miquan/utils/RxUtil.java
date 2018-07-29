@@ -1,4 +1,4 @@
-package com.example.miquan.utils;
+package com.sharevar.miquan.utils;
 
 import rx.Observable;
 import rx.Subscriber;

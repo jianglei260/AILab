@@ -1,4 +1,4 @@
-package com.example.miquan.ui.widget;
+package com.sharevar.miquan.ui.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

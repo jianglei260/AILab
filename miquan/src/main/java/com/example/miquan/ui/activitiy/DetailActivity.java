@@ -1,4 +1,4 @@
-package com.example.miquan.ui.activitiy;
+package com.sharevar.miquan.ui.activitiy;
 
 import android.app.Dialog;
 import android.databinding.DataBindingUtil;
@@ -18,18 +18,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.miquan.R;
-import com.example.miquan.base.BaseActivity;
-import com.example.miquan.base.ListItemViewModel;
-import com.example.miquan.data.server.RetrofitProvider;
-import com.example.miquan.databinding.ActivityDetailBinding;
-import com.example.miquan.databinding.DialogBuyBinding;
-import com.example.miquan.ui.detail.BuyHintViewModel;
-import com.example.miquan.ui.detail.DetailViewModel;
-import com.example.miquan.ui.detail.ImageItemViewModel;
-import com.example.miquan.utils.IOTask;
-import com.example.miquan.utils.RxUtil;
-import com.example.miquan.utils.UIAction;
+import com.sharevar.miquan.R;
+import com.sharevar.miquan.base.BaseActivity;
+import com.sharevar.miquan.base.ListItemViewModel;
+import com.sharevar.miquan.data.server.RetrofitProvider;
+import com.sharevar.miquan.databinding.ActivityDetailBinding;
+import com.sharevar.miquan.databinding.DialogBuyBinding;
+import com.sharevar.miquan.ui.detail.BuyHintViewModel;
+import com.sharevar.miquan.ui.detail.DetailViewModel;
+import com.sharevar.miquan.ui.detail.ImageItemViewModel;
+import com.sharevar.miquan.utils.IOTask;
+import com.sharevar.miquan.utils.RxUtil;
+import com.sharevar.miquan.utils.UIAction;
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.datasource.DataSource;

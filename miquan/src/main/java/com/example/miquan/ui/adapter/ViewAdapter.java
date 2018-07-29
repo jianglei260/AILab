@@ -1,4 +1,4 @@
-package com.example.miquan.ui.adapter;
+package com.sharevar.miquan.ui.adapter;
 
 import android.databinding.BindingAdapter;
 import android.view.View;

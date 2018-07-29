@@ -1,4 +1,4 @@
-package com.example.miquan.ui.activitiy;
+package com.sharevar.miquan.ui.activitiy;
 
 import android.databinding.DataBindingUtil;
 import android.os.Handler;
@@ -6,10 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 
-import com.example.miquan.R;
-import com.example.miquan.base.BaseActivity;
-import com.example.miquan.databinding.ActivityLoginBinding;
-import com.example.miquan.ui.login.LoginViewModel;
+import com.sharevar.miquan.R;
+import com.sharevar.miquan.base.BaseActivity;
+import com.sharevar.miquan.databinding.ActivityLoginBinding;
+import com.sharevar.miquan.ui.login.LoginViewModel;
 
 public class LoginActivity extends BaseActivity {
     private ActivityLoginBinding binding;

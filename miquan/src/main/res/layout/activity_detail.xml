@@ -6,7 +6,7 @@
 
         <variable
             name="detailViewModel"
-            type="com.example.miquan.ui.detail.DetailViewModel" />
+            type="com.sharevar.miquan.ui.detail.DetailViewModel" />
 
         <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
 

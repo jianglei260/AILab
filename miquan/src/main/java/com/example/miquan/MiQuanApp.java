@@ -1,10 +1,10 @@
-package com.example.miquan;
+package com.sharevar.miquan;
 
 import android.app.Application;
 import android.content.pm.ApplicationInfo;
 
-import com.example.miquan.data.server.RetrofitProvider;
-import com.example.miquan.upgrade.AppUpdateTool;
+import com.sharevar.miquan.data.server.RetrofitProvider;
+import com.sharevar.miquan.upgrade.AppUpdateTool;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 public class MiQuanApp extends Application {

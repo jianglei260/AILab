@@ -1,6 +1,6 @@
-package com.example.miquan.data.server;
+package com.sharevar.miquan.data.server;
 
-import com.example.miquan.MiQuanApp;
+import com.sharevar.miquan.MiQuanApp;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

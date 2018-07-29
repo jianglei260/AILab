@@ -1,4 +1,4 @@
-package com.example.miquan.ui.widget;
+package com.sharevar.miquan.ui.widget;
 
 import android.content.Context;
 import android.view.Gravity;
@@ -8,7 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.miquan.R;
+import com.sharevar.miquan.R;
 
 
 /**

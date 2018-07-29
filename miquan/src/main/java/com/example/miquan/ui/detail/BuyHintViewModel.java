@@ -1,11 +1,11 @@
-package com.example.miquan.ui.detail;
+package com.sharevar.miquan.ui.detail;
 
 import android.content.Intent;
 
-import com.example.miquan.base.ListItemViewModel;
-import com.example.miquan.base.LoaddingViewModel;
-import com.example.miquan.ui.activitiy.ChargeActivity;
-import com.example.miquan.ui.activitiy.DetailActivity;
+import com.sharevar.miquan.base.ListItemViewModel;
+import com.sharevar.miquan.base.LoaddingViewModel;
+import com.sharevar.miquan.ui.activitiy.ChargeActivity;
+import com.sharevar.miquan.ui.activitiy.DetailActivity;
 import com.kelin.mvvmlight.command.ReplyCommand;
 
 import rx.functions.Action0;

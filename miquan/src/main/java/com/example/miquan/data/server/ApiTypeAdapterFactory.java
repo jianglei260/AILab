@@ -1,4 +1,4 @@
-package com.example.miquan.data.server;
+package com.sharevar.miquan.data.server;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;

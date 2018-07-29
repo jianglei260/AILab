@@ -5,7 +5,7 @@
 
         <variable
             name="buyViewModel"
-            type="com.example.miquan.ui.detail.BuyHintViewModel" />
+            type="com.sharevar.miquan.ui.detail.BuyHintViewModel" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"

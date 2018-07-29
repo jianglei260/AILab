@@ -1,4 +1,4 @@
-package com.example.miquan.upgrade;
+package com.sharevar.miquan.upgrade;
 
 /**
  * Created by jianglei on 16/8/4.

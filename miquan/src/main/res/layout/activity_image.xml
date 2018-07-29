@@ -5,7 +5,7 @@
 
         <variable
             name="imageViewModel"
-            type="com.example.miquan.ui.detail.ImageViewModel" />
+            type="com.sharevar.miquan.ui.detail.ImageViewModel" />
         <import type="android.view.View"/>
     </data>
 

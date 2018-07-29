@@ -1,15 +1,15 @@
-package com.example.miquan.ui.detail;
+package com.sharevar.miquan.ui.detail;
 
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableList;
 import android.util.Log;
 
-import com.example.miquan.R;
-import com.example.miquan.BR;
-import com.example.miquan.base.LoaddingViewModel;
-import com.example.miquan.data.ResouceRepository;
-import com.example.miquan.ui.activitiy.ImageActivity;
+import com.sharevar.miquan.R;
+import com.sharevar.miquan.BR;
+import com.sharevar.miquan.base.LoaddingViewModel;
+import com.sharevar.miquan.data.ResouceRepository;
+import com.sharevar.miquan.ui.activitiy.ImageActivity;
 import com.kelin.mvvmlight.command.ReplyCommand;
 
 

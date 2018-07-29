@@ -1,4 +1,4 @@
-package com.example.miquan.base;
+package com.sharevar.miquan.base;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -14,7 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.miquan.ui.widget.CustomDraweeView;
+import com.sharevar.miquan.ui.widget.CustomDraweeView;
 
 
 /**

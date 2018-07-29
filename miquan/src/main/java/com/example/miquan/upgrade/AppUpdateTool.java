@@ -1,4 +1,4 @@
-package com.example.miquan.upgrade;
+package com.sharevar.miquan.upgrade;
 
 import android.app.DownloadManager;
 import android.content.Context;

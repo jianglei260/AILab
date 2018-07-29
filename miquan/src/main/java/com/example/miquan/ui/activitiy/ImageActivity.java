@@ -1,4 +1,4 @@
-package com.example.miquan.ui.activitiy;
+package com.sharevar.miquan.ui.activitiy;
 
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
@@ -10,10 +10,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
-import com.example.miquan.R;
-import com.example.miquan.databinding.ActivityImageBinding;
-import com.example.miquan.ui.adapter.SimpleDraweeAdapteer;
-import com.example.miquan.ui.detail.ImageViewModel;
+import com.sharevar.miquan.R;
+import com.sharevar.miquan.databinding.ActivityImageBinding;
+import com.sharevar.miquan.ui.adapter.SimpleDraweeAdapteer;
+import com.sharevar.miquan.ui.detail.ImageViewModel;
 import com.kelin.mvvmlight.bindingadapter.viewpager.ViewBindingAdapter;
 
 import me.tatarka.bindingcollectionadapter.BindingCollectionAdapters;

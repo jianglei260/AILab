@@ -1,13 +1,13 @@
-package com.example.miquan.ui.activitiy;
+package com.sharevar.miquan.ui.activitiy;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.miquan.R;
-import com.example.miquan.base.BaseActivity;
-import com.example.miquan.databinding.ActivityChargeBinding;
-import com.example.miquan.ui.charge.ChargeVIewModel;
+import com.sharevar.miquan.R;
+import com.sharevar.miquan.base.BaseActivity;
+import com.sharevar.miquan.databinding.ActivityChargeBinding;
+import com.sharevar.miquan.ui.charge.ChargeVIewModel;
 
 public class ChargeActivity extends BaseActivity {
     private ActivityChargeBinding binding;

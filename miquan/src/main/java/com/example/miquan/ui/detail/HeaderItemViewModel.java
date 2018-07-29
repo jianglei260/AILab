@@ -1,8 +1,8 @@
-package com.example.miquan.ui.detail;
+package com.sharevar.miquan.ui.detail;
 
 import android.databinding.ObservableField;
 
-import com.example.miquan.base.ListItemViewModel;
+import com.sharevar.miquan.base.ListItemViewModel;
 
 public class HeaderItemViewModel extends ListItemViewModel {
     public ObservableField<String> avataUrl = new ObservableField<>();

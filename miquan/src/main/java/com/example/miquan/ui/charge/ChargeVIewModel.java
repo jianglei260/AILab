@@ -1,4 +1,4 @@
-package com.example.miquan.ui.charge;
+package com.sharevar.miquan.ui.charge;
 
 import android.content.Intent;
 import android.databinding.ObservableField;
@@ -6,18 +6,18 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.alipay.sdk.app.PayTask;
-import com.example.miquan.R;
-import com.example.miquan.base.LoaddingViewModel;
-import com.example.miquan.data.UserRepository;
-import com.example.miquan.data.server.RemoteDataSource;
-import com.example.miquan.model.PayResult;
-import com.example.miquan.model.Price;
-import com.example.miquan.ui.activitiy.ChargeActivity;
-import com.example.miquan.ui.activitiy.LoginActivity;
-import com.example.miquan.ui.widget.CustomToast;
-import com.example.miquan.utils.IOTask;
-import com.example.miquan.utils.RxUtil;
-import com.example.miquan.utils.UIAction;
+import com.sharevar.miquan.R;
+import com.sharevar.miquan.base.LoaddingViewModel;
+import com.sharevar.miquan.data.UserRepository;
+import com.sharevar.miquan.data.server.RemoteDataSource;
+import com.sharevar.miquan.model.PayResult;
+import com.sharevar.miquan.model.Price;
+import com.sharevar.miquan.ui.activitiy.ChargeActivity;
+import com.sharevar.miquan.ui.activitiy.LoginActivity;
+import com.sharevar.miquan.ui.widget.CustomToast;
+import com.sharevar.miquan.utils.IOTask;
+import com.sharevar.miquan.utils.RxUtil;
+import com.sharevar.miquan.utils.UIAction;
 import com.kelin.mvvmlight.command.ReplyCommand;
 
 import org.json.JSONException;

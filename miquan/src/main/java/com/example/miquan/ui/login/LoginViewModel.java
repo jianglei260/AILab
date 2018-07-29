@@ -1,4 +1,4 @@
-package com.example.miquan.ui.login;
+package com.sharevar.miquan.ui.login;
 
 import android.Manifest;
 import android.content.Context;
@@ -9,14 +9,14 @@ import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
-import com.example.miquan.R;
-import com.example.miquan.base.LoaddingViewModel;
-import com.example.miquan.data.UserRepository;
-import com.example.miquan.model.User;
-import com.example.miquan.ui.activitiy.LoginActivity;
-import com.example.miquan.utils.IOTask;
-import com.example.miquan.utils.RxUtil;
-import com.example.miquan.utils.UIAction;
+import com.sharevar.miquan.R;
+import com.sharevar.miquan.base.LoaddingViewModel;
+import com.sharevar.miquan.data.UserRepository;
+import com.sharevar.miquan.model.User;
+import com.sharevar.miquan.ui.activitiy.LoginActivity;
+import com.sharevar.miquan.utils.IOTask;
+import com.sharevar.miquan.utils.RxUtil;
+import com.sharevar.miquan.utils.UIAction;
 import com.kelin.mvvmlight.command.ReplyCommand;
 
 import rx.functions.Action0;

@@ -1,4 +1,4 @@
-package com.example.miquan.utils;
+package com.sharevar.miquan.utils;
 
 /**
  * Created by jianglei on 2016/12/1.

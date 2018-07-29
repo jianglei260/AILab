@@ -1,4 +1,4 @@
-package com.example.miquan.base;
+package com.sharevar.miquan.base;
 
 import android.databinding.ObservableBoolean;
 
