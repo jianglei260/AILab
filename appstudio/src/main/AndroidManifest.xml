@@ -22,6 +22,8 @@
         </activity>
         <activity android:name=".runtime.ui.ContainerActivity" />
         <activity android:name=".runtime.ui.NavigateActivity"></activity>
+        <activity android:name=".ui.object.ObjectEditActivity"/>
+        <activity android:name=".ui.object.PlaygroundActivity"/>
     </application>
 
 </manifest>

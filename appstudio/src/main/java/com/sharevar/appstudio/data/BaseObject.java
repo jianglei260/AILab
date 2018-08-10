@@ -3,6 +3,7 @@ package com.sharevar.appstudio.data;
 import com.sharevar.appstudio.object.Type;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,13 +14,17 @@ public class BaseObject {
         return getClass().getSimpleName();
     }
 
-    public Map<String, Object> attrs() {
+    public List<Attr> attrs() {
         Field[] fields = getClass().getFields();
-        HashMap<String, Object> attrs = new HashMap<>();
+        List<Attr> attrs = new ArrayList<>();
         for (Field field : fields) {
             field.setAccessible(true);
             try {
-                attrs.put(field.getName(), field.get(this));
+                Attr attr=new Attr();
+                attr.setName(field.getName());
+                attr.setValue(field.get(this));
+                attr.setType(field.getType().getName());
+                attrs.add(attr);
             } catch (Exception e) {
                 e.printStackTrace();
             }
