@@ -4,7 +4,7 @@ import com.sharevar.appstudio.object.function.Function;
 
 import java.io.Serializable;
 
-public class Statement implements Serializable {
+public class Statement extends Function implements Serializable {
     private Variable retVaule;
     private Function function;
 

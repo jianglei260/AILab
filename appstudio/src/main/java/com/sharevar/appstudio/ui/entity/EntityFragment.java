@@ -33,7 +33,7 @@ public class EntityFragment extends BaseListFragment {
         adapter.register(Entity.class, R.layout.list_item_entity, new RecyclerViewBinder<Entity>() {
             @Override
             public void bind(Entity entity) {
-                ((TextView) view(R.id.name)).setText(entity.getSimpleName());
+                textView(R.id.name).setText(entity.getSimpleName());
             }
         });
         recyclerView.setAdapter(adapter);

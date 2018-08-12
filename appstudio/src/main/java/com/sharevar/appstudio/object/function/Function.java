@@ -13,8 +13,8 @@ public  class Function extends BaseObject {
     private String path;
 
     public String objectId="";
-    public Date createdAt=new Date();
-    public Date updateAt=new Date();
+    public Date createdAt;
+    public Date updateAt;
 
     public String getPath() {
         return path;

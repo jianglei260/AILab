@@ -3,7 +3,7 @@ package com.sharevar.appstudio.object.function.builtin;
 import com.sharevar.appstudio.object.function.Function;
 import com.sharevar.appstudio.object.function.ReturnType;
 
-public class Else extends Function {
+public class IfElse extends Function {
     CodeBlock codeBlock;
 
     @Override

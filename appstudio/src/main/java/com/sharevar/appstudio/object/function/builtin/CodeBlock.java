@@ -9,7 +9,7 @@ import com.sharevar.appstudio.object.function.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class CodeBlock extends Function {
+public abstract class CodeBlock extends Statement {
     protected List<Statement> statements = new ArrayList<>();
     protected List<Variable> variables = new ArrayList<>();
 
