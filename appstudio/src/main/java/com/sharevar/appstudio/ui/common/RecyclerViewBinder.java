@@ -1,5 +1,6 @@
 package com.sharevar.appstudio.ui.common;
 
+import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +23,7 @@ public abstract class RecyclerViewBinder<T> {
         this.viewHolder = viewHolder;
     }
 
-    public View view(int id) {
+    public View view(@IdRes int id) {
         View view = holderMap.get(id);
         if (view == null) {
             view = viewHolder.itemView.findViewById(id);
@@ -31,19 +32,19 @@ public abstract class RecyclerViewBinder<T> {
         return view;
     }
 
-    public TextView textView(int id){
+    public TextView textView(@IdRes int id){
         return (TextView) view(id);
     }
 
-    public LinearLayout linearLayout(int id){
+    public LinearLayout linearLayout(@IdRes int id){
         return (LinearLayout) view(id);
     }
 
-    public ImageView imageView(int id){
+    public ImageView imageView(@IdRes int id){
         return (ImageView) view(id);
     }
 
-    public Button button(int id){
+    public Button button(@IdRes int id){
         return (Button) view(id);
     }
     public abstract void bind(T t);

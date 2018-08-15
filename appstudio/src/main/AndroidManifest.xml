@@ -14,16 +14,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoTitleBar">
         <activity android:name=".ui.MainActivity">
+
+        </activity>
+        <activity android:name=".runtime.ui.ContainerActivity" />
+        <activity android:name=".runtime.ui.NavigateActivity"></activity>
+        <activity android:name=".ui.object.ObjectEditActivity"/>
+        <activity android:name=".ui.object.PlaygroundActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".runtime.ui.ContainerActivity" />
-        <activity android:name=".runtime.ui.NavigateActivity"></activity>
-        <activity android:name=".ui.object.ObjectEditActivity"/>
-        <activity android:name=".ui.object.PlaygroundActivity"/>
     </application>
 
 </manifest>

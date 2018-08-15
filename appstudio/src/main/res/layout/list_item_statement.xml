@@ -1,34 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/index"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"/>
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="2dp">
 
-    <TextView
-        android:id="@+id/fun_name"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/fun_return"/>
-    <ImageView
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/ic_close"
-        android:layout_margin="8dp"
-        android:layout_alignParentRight="true"/>
-    <TextView
-        android:id="@+id/fun_return"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/index"
-        android:layout_below="@id/fun_name"/>
-    <LinearLayout
-        android:id="@+id/fun_params"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/fun_name"></LinearLayout>
-</RelativeLayout>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/index"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/fun_return"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_below="@id/fun_name"
+            android:layout_toRightOf="@id/index" />
+
+        <TextView
+            android:id="@+id/fun_name"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_toRightOf="@+id/fun_return" />
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="8dp"
+            android:src="@drawable/ic_close" />
+
+        <LinearLayout
+            android:id="@+id/fun_params"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fun_name"
+            android:orientation="vertical"></LinearLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

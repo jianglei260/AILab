@@ -11,13 +11,17 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
 import com.sharevar.appstudio.R;
 import com.sharevar.appstudio.data.Entity;
 import com.sharevar.appstudio.object.Statement;
+import com.sharevar.appstudio.object.Type;
 import com.sharevar.appstudio.object.Variable;
 import com.sharevar.appstudio.object.function.Function;
 import com.sharevar.appstudio.object.function.Parameter;
 import com.sharevar.appstudio.object.function.builtin.CodeBlock;
+import com.sharevar.appstudio.object.function.builtin.If;
+import com.sharevar.appstudio.object.function.builtin.Loop;
 import com.sharevar.appstudio.ui.base.BaseActivity;
 import com.sharevar.appstudio.ui.common.RecyclerViewAdapter;
 import com.sharevar.appstudio.ui.common.RecyclerViewBinder;
@@ -29,7 +33,7 @@ import java.util.List;
 public class PlaygroundActivity extends BaseActivity {
     RecyclerView recyclerView;
     TextView title;
-    List<ItemWrapper<Statement>> itemWrappers;
+    List<ItemWrapper<Statement>> itemWrappers=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +41,38 @@ public class PlaygroundActivity extends BaseActivity {
         setContentView(R.layout.activity_palyground);
         recyclerView = findViewById(R.id.recycler_view);
         title = findViewById(R.id.title);
+        initRecyclerView();
+        initRecyclerViewDrag();
+        initData();
+    }
+    public void initData(){
+        List<Statement> statements=new ArrayList<>();
+        Statement statement1=new Statement();
+        statement1.setFunction(new If());
+        Type type1=statement1.getFunction().getReturnType();
+        Variable variable1=new Variable();
+        variable1.setType(type1);
+        variable1.setName(type1.getName());
+        statement1.setRetVaule(variable1);
+        Statement statement2=new Statement();
+        statement2.setFunction(new Loop());
+        Type type2=statement2.getFunction().getReturnType();
+        Variable variable2=new Variable();
+        variable2.setType(type2);
+        variable2.setName(type2.getName());
+        statement2.setRetVaule(variable2);
+        statements.add(statement1);
+        statements.add(statement2);
+        setStatements(statements);
     }
 
     private void initRecyclerView() {
         final RecyclerViewAdapter adapter = new RecyclerViewAdapter();
-        adapter.register((Class<? extends ItemWrapper<Statement>>) ItemWrapper.class, R.layout.list_item_statement, new RecyclerViewBinder<ItemWrapper<Statement>>() {
+        adapter.register((Class<ItemWrapper<Statement>>) new TypeToken<ItemWrapper<Statement>>() {
+        }.getRawType(), R.layout.list_item_statement, new RecyclerViewBinder<ItemWrapper<Statement>>() {
             @Override
             public void bind(ItemWrapper<Statement> itemWrapper) {
-                textView(R.id.index).setText(itemWrapper.getIndex());
+                textView(R.id.index).setText(String.valueOf(itemWrappers.indexOf(itemWrapper)));
                 ViewGroup.MarginLayoutParams marginLayoutParams = ((ViewGroup.MarginLayoutParams) viewHolder.itemView.getLayoutParams());
                 marginLayoutParams.leftMargin = getResources().getDimensionPixelOffset(R.dimen.child_left_margin) * itemWrapper.getDepth();
                 Function function = itemWrapper.getObject().getFunction();
@@ -65,6 +93,7 @@ public class PlaygroundActivity extends BaseActivity {
             }
         });
         recyclerView.setAdapter(adapter);
+        adapter.setItems(itemWrappers);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
@@ -118,10 +147,10 @@ public class PlaygroundActivity extends BaseActivity {
                 // 移动时更改列表中对应的位置并返回true
 //                Collections.swap(itemWrappers, viewHolder.getAdapterPosition(), target
 ////                        .getAdapterPosition());
-                ItemWrapper<Statement> itemWrapper = itemWrappers.remove(viewHolder.getAdapterPosition());
-                itemWrappers.add(target.getAdapterPosition(), itemWrapper);
+                int srcPosition = viewHolder.getAdapterPosition();
+                int position = target.getAdapterPosition();
+                moveStatement(srcPosition, position);
                 //todo 实现itemwrapper 层级修改，可能需要修改Codeblock插入逻辑
-                
                 return true;
             }
 
@@ -151,6 +180,18 @@ public class PlaygroundActivity extends BaseActivity {
         }).attachToRecyclerView(recyclerView);
     }
 
+
+    public  void moveStatement(int srcPostion, int targetPosition) {
+        ItemWrapper<Statement> targetItem = itemWrappers.get(targetPosition);
+        ItemWrapper<Statement> srcItem = itemWrappers.get(srcPostion);
+        int depth = srcItem.getDepth();
+        srcItem.setDepth(targetItem.getDepth());
+        srcItem.setParent(targetItem.getParent());
+        itemWrappers.add(targetPosition,srcItem);
+
+    }
+
+
     private void pickUpAnimation(View view) {
         ObjectAnimator animator = ObjectAnimator.ofFloat(view, "translationZ", 1f, 10f);
         animator.setInterpolator(new DecelerateInterpolator());
@@ -167,6 +208,7 @@ public class PlaygroundActivity extends BaseActivity {
 
     public void insertStatement(Statement statement) {
         //todo
+
     }
 
     public List<ItemWrapper<Statement>> toItemWrapper(List<Statement> statements) {
@@ -197,6 +239,8 @@ public class PlaygroundActivity extends BaseActivity {
 
     public void setStatements(List<Statement> statements) {
         itemWrappers = toItemWrapper(statements);
+        ((RecyclerViewAdapter)recyclerView.getAdapter()).setItems(itemWrappers);
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 
     public List<Statement> getStatements() {

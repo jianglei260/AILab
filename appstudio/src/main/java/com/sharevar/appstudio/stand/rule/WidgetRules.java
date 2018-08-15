@@ -43,7 +43,7 @@ public class WidgetRules {
         if (i != -1) {
             packeageName = packeageName.substring(0, i);
         }
-        String ruleClassName = packeageName + "." + simpleName+"Rule";
+        String ruleClassName = packeageName + "." + simpleName + "Rule";
         Class<? extends ViewRule> ruleClass = null;
         try {
             ruleClass = (Class<? extends ViewRule>) Class.forName(ruleClassName);

@@ -3,11 +3,12 @@ package com.sharevar.appstudio.object.function;
 import com.sharevar.appstudio.data.BaseObject;
 import com.sharevar.appstudio.object.Type;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public  class Function extends BaseObject {
-    protected List<Parameter> parameters;
+    protected List<Parameter> parameters=new ArrayList<>();
     protected Type returnType;
     protected String name;
     private String path;
@@ -67,6 +68,7 @@ public  class Function extends BaseObject {
     public Type getReturnType() {
         return returnType;
     }
+
 
     public void setReturnType(Type returnType) {
         this.returnType = returnType;
