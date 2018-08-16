@@ -10,7 +10,6 @@ public class Statement extends Function implements Serializable {
     private boolean debug;
     private boolean watch;
 
-
     public Variable getRetVaule() {
         return retVaule;
     }

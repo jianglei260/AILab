@@ -5,7 +5,19 @@ import com.sharevar.appstudio.object.Statement;
 import java.util.List;
 
 public class VM {
-    public void load(List<Statement> statements){
+    private List<Statement> statements;
+
+    public static VM load(List<Statement> statements) {
+        VM vm = new VM();
+        vm.statements = statements;
+        return vm;
+    }
+
+    public Statement nextStatement() {
+        return null;
+    }
+
+    public void start() {
 
     }
 }
