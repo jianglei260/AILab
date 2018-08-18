@@ -24,7 +24,6 @@ public class UI {
 
     @Name(id = R.string.linear_layout)
     public static Widget linearLayout() {
-        View
         return Widget.get();
     }
 
