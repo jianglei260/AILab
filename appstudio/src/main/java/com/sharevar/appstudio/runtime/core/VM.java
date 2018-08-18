@@ -13,7 +13,7 @@ public class VM {
         return vm;
     }
 
-    public Statement nextStatement() {
+    public Statement nextStep() {
         return null;
     }
 

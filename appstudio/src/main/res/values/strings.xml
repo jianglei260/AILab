@@ -5,4 +5,55 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="ui">界面</string>
+    <string name="text"></string>
+    <string name="net">网络</string>
+    <string name="script">脚本</string>
+    <string name="set">设置</string>
+
+    <string name="widget">控件</string>
+    <string name="linear_layout">线性布局</string>
+    <string name="text_view">文本</string>
+    <string name="image_view">图片</string>
+    <string name="relative_layout">按钮</string>
+    <string name="recycler_view">列表</string>
+    <string name="button">按钮</string>
+
+
+    <string name="string">字符串</string>
+    <string name="sub_string">截取</string>
+    <string name="length">长度</string>
+    <string name="contains">包含</string>
+    <string name="is_empty">是否为空</string>
+    <string name="index_of">查找位置</string>
+    <string name="replace">替换</string>
+    <string name="trim">修剪</string>
+
+    <string name="view">视图</string>
+    <string name="view_group">视图容器</string>
+    <string name="add_view">添加视图</string>
+    <string name="padding">内间距</string>
+    <string name="margin">外间距</string>
+    <string name="left">左</string>
+    <string name="right">右</string>
+    <string name="bottom">底部</string>
+    <string name="top">顶部</string>
+    <string name="background">背景</string>
+    <string name="width">宽</string>
+    <string name="height">高</string>
+    <string name="params">参数</string>
+    <string name="vertical">纵向</string>
+    <string name="horizontal">横向</string>
+    <string name="center">居中</string>
+    <string name="orientation">方向</string>
+    <string name="layout">布局</string>
+    <string name="align">对齐</string>
+
+
+    <string name=""></string>
+
+
+
+
 </resources>

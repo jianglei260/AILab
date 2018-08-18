@@ -1,5 +1,5 @@
 package com.sharevar.appstudio.runtime.sdk;
 
-public class Text {
+public class Script {
 
 }
