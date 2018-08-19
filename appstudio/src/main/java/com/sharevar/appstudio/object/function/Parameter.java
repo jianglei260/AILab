@@ -3,11 +3,22 @@ package com.sharevar.appstudio.object.function;
 import com.sharevar.appstudio.data.BaseObject;
 import com.sharevar.appstudio.object.Type;
 
+import java.util.List;
+
 public class Parameter extends BaseObject {
     private Type type;
     private String name;
     private Object defaultValue;
     private Object value;
+    private List<Option> options;
+
+    public List<Option> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<Option> options) {
+        this.options = options;
+    }
 
     public Object getValue() {
         return value;

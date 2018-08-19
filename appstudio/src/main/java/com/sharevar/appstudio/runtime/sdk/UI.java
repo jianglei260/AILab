@@ -9,10 +9,14 @@ import com.sharevar.appstudio.runtime.annotation.Name;
 @Name(id = R.string.ui)
 public class UI {
 
+    @Name(id = R.string.ui)
     public static class Widget extends Function {
+        Widget() {
+
+        }
+
         public static Widget get() {
             Widget widget = new Widget();
-            Package pa;
             return widget;
         }
 
@@ -32,4 +36,15 @@ public class UI {
         return Widget.get();
     }
 
+    public Function childView(){
+        return new Function(){};
+    }
+    public Function addView() {
+        return new Function() {
+            @Override
+            public Object invoke() {
+                return super.invoke();
+            }
+        };
+    }
 }
