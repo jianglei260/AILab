@@ -2,6 +2,8 @@ package com.sharevar.appstudio.runtime.core;
 
 import android.content.Context;
 
+import com.sharevar.appstudio.object.function.CodeBlock;
+
 public class RuntimeContext {
     private Context context;
 
@@ -11,5 +13,10 @@ public class RuntimeContext {
 
     public void setContext(Context context) {
         this.context = context;
+    }
+
+    public CodeBlock getCodeBlock(){
+        //todo
+        return null;
     }
 }

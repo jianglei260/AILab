@@ -27,6 +27,8 @@ public class Function extends BaseObject {
 
     private RuntimeContext runtimeContext;
 
+    private int modeIndex;
+
 
     public String getPath() {
         return path;
@@ -76,6 +78,15 @@ public class Function extends BaseObject {
             }
         }
         return null;
+    }
+
+
+    public int getModeIndex() {
+        return modeIndex;
+    }
+
+    public void setModeIndex(int modeIndex) {
+        this.modeIndex = modeIndex;
     }
 
     public RuntimeContext getRuntimeContext() {

@@ -5,6 +5,16 @@ import java.util.List;
 public class Mode {
     private String name;
     private List<Parameter> parameters;
+    private int paramsNum;
+
+
+    public int getParamsNum() {
+        return paramsNum;
+    }
+
+    public void setParamsNum(int paramsNum) {
+        this.paramsNum = paramsNum;
+    }
 
     public String getName() {
         return name;
