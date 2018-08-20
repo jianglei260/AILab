@@ -1,11 +1,10 @@
-package com.sharevar.appstudio.runtime.sdk.ui;
+package com.sharevar.appstudio.runtime.sdk.script;
 
 import com.sharevar.appstudio.object.function.Function;
 import com.sharevar.appstudio.runtime.sdk.FunctionAdapter;
 
-public class AddViewAdapter extends FunctionAdapter {
-
-    public AddViewAdapter(Function function) {
+public class LoopAdapter extends FunctionAdapter {
+    public LoopAdapter(Function function) {
         super(function);
     }
 

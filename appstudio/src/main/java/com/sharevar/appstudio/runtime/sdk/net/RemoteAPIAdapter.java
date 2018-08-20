@@ -1,4 +1,4 @@
-package com.sharevar.appstudio.runtime.sdk.system;
+package com.sharevar.appstudio.runtime.sdk.net;
 
 import com.sharevar.appstudio.common.serializable.JsonUtil;
 import com.sharevar.appstudio.object.function.Function;

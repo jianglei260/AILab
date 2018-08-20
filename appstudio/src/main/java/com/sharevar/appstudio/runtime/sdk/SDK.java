@@ -1,8 +1,5 @@
 package com.sharevar.appstudio.runtime.sdk;
 
-import android.content.Context;
-import android.content.res.XmlResourceParser;
-
 import com.sharevar.appstudio.common.serializable.XmlUtil;
 import com.sharevar.appstudio.object.function.Function;
 import com.sharevar.appstudio.object.function.Mode;
