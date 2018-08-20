@@ -1,4 +1,4 @@
-package com.sharevar.appstudio.object.function.builtin;
+package com.sharevar.appstudio.object.function;
 
 import com.sharevar.appstudio.object.function.ReturnType;
 

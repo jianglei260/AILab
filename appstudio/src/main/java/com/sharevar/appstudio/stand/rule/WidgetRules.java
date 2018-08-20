@@ -10,8 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WidgetRules {
-
-
     public static Class<? extends ViewRule> ruleClass(String type) {
         Class<? extends ViewRule> rule = lookFromBuiltin(type);
         Class<? extends View> superclass = null;

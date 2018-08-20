@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <data>
     <FuctionGroup name="ui">
-        <Function name="View" adapter="" parent="" returnType="com.sharevar.appstudio.data.Widget"
+        <Function name="View" adapter="com.sharevar.appstudio.runtime.sdk.UI.WidgetAdapter" parent="" returnType="com.sharevar.appstudio.data.Widget"
             tag="android.view.View">
             <Mode>
                 <Parameter name="layoutWidth" defaultValue="-1" require="true"
@@ -27,7 +27,7 @@
                 </Parameter>
             </Mode>
         </Function>
-        <Function name="LinearLayout" adapter="" parent="View"
+        <Function name="LinearLayout" adapter="com.sharevar.appstudio.runtime.sdk.UI.LayoutAdapter" parent="View"
             returnType="com.sharevar.appstudio.data.Widget" tag="android.widget.LinearLayout">
             <Mode>
                 <Parameter name="oriention" defaultValue="1" type="java.lang.Integer">
@@ -36,18 +36,18 @@
                 </Parameter>
             </Mode>
         </Function>
-        <Function name="RelativeLayout" adapter="" parent="View"
+        <Function name="RelativeLayout" adapter="com.sharevar.appstudio.runtime.sdk.UI.LayoutAdapter" parent="View"
             returnType="com.sharevar.appstudio.data.Widget" tag="android.widget.RelativeLayout">
             <Mode></Mode>
         </Function>
 
-        <Function name="RecyclerView" adapter="" parent="View"
+        <Function name="RecyclerView" adapter="com.sharevar.appstudio.runtime.sdk.UI.LayoutAdapter" parent="View"
             returnType="com.sharevar.appstudio.data.Widget"
             tag="android.support.v7.widget.RecyclerView">
             <Mode></Mode>
         </Function>
 
-        <Function name="TextView" adapter="" parent="View"
+        <Function name="TextView" adapter="com.sharevar.appstudio.runtime.sdk.UI.WidgetAdapter" parent="View"
             returnType="com.sharevar.appstudio.data.Widget"
             tag="android.widget.TextView">
             <Mode>
@@ -56,7 +56,7 @@
                 <Parameter name="textColor" require="true" type="java.lang.Integer"/>
             </Mode>
         </Function>
-        <Function name="ImageView" adapter="" parent="View"
+        <Function name="ImageView" adapter="com.sharevar.appstudio.runtime.sdk.UI.WidgetAdapter" parent="View"
             returnType="com.sharevar.appstudio.data.Widget"
             tag="android.support.v7.widget.AppCompatImageView">
             <Mode>
@@ -64,7 +64,7 @@
                 <Parameter name="tint" require="true" type="java.lang.Integer"/>
             </Mode>
         </Function>
-        <Function name="Button" adapter="" parent="View"
+        <Function name="Button" adapter="com.sharevar.appstudio.runtime.sdk.UI.WidgetAdapter" parent="View"
             returnType="com.sharevar.appstudio.data.Widget"
             tag="android.widget.Button">
             <Mode>
@@ -73,6 +73,7 @@
                 <Parameter name="radius" type="java.lang.Integer"/>
             </Mode>
         </Function>
+        <Function name=""
 
     </FuctionGroup>
 </data>

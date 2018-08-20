@@ -1,21 +1,32 @@
 package com.sharevar.appstudio.object.function;
 
+import com.sharevar.appstudio.common.string.StringUtil;
 import com.sharevar.appstudio.data.BaseObject;
 import com.sharevar.appstudio.object.Type;
+import com.sharevar.appstudio.runtime.core.RuntimeContext;
+import com.sharevar.appstudio.runtime.sdk.FunctionAdapter;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public  class Function extends BaseObject {
-    protected List<Parameter> parameters=new ArrayList<>();
+public class Function extends BaseObject {
+    protected List<Mode> modes = new ArrayList<>();
     protected Type returnType;
     protected String name;
     private String path;
 
-    public String objectId="";
+    public String objectId = "";
     public Date createdAt;
     public Date updateAt;
+
+    protected String tag;
+
+    protected String adapter;
+    protected String parent;
+
+    private RuntimeContext runtimeContext;
+
 
     public String getPath() {
         return path;
@@ -53,16 +64,67 @@ public  class Function extends BaseObject {
         return getClass().getSimpleName();
     }
 
-    public  Object invoke(){
+
+    public Object invoke() {
+        if (!StringUtil.isNullOrEmpty(adapter)) {
+            try {
+                Class<FunctionAdapter> adapterClazz = (Class<FunctionAdapter>) Class.forName(adapter);
+                FunctionAdapter functionAdapter = adapterClazz.getConstructor(Function.class).newInstance(this);
+                return functionAdapter.invoke();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return null;
     }
 
+    public RuntimeContext getRuntimeContext() {
+        return runtimeContext;
+    }
+
+    public void setRuntimeContext(RuntimeContext runtimeContext) {
+        this.runtimeContext = runtimeContext;
+    }
+
+    public List<Mode> getModes() {
+        return modes;
+    }
+
+    public void setModes(List<Mode> modes) {
+        this.modes = modes;
+    }
+
+    public String getParent() {
+        return parent;
+    }
+
+    public void setParent(String parent) {
+        this.parent = parent;
+    }
+
+    public String getAdapter() {
+        return adapter;
+    }
+
+
+    public void setAdapter(String adapter) {
+        this.adapter = adapter;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
     public List<Parameter> getParameters() {
-        return parameters;
+        return modes.get(0).getParameters();
     }
 
     public void setParameters(List<Parameter> parameters) {
-        this.parameters = parameters;
+        this.modes.get(0).setParameters(parameters);
     }
 
     public Type getReturnType() {
