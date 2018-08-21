@@ -4,13 +4,11 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sharevar.appstudio.object.Type;
 import com.sharevar.appstudio.stand.annotation.Option;
 import com.sharevar.appstudio.stand.annotation.WidgetAttr;
 import com.sharevar.appstudio.stand.annotation.WidgetRule;
-import com.sharevar.appstudio.stand.type.Type;
 import com.sharevar.appstudio.stand.type.TypeInference;
-
-import java.util.ArrayList;
 
 @WidgetRule(View.class)
 public class ViewRule {

@@ -1,5 +1,7 @@
 package com.sharevar.appstudio.stand.type;
 
+import com.sharevar.appstudio.object.Type;
+
 public class ConvertFactory {
     public static Integer toInteger(int value) {
         return Integer.valueOf(value);
@@ -45,10 +47,23 @@ public class ConvertFactory {
         return Long.valueOf(value);
     }
 
-    public static Type toType(Class clazz){
+    public static Boolean toBoolean(String value) {
+        return Boolean.parseBoolean(value);
+    }
+
+    public static String toString(boolean value) {
+        return String.valueOf(value);
+    }
+
+    public static Type toType(Class clazz) {
         return Type.of(clazz);
     }
-    public static Class toClass(String clazz){
+
+    public static Type toType(String value) {
+        return Type.of(value);
+    }
+
+    public static Class toClass(String clazz) {
         try {
             return Class.forName(clazz);
         } catch (ClassNotFoundException e) {

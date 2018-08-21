@@ -3,6 +3,7 @@ package com.sharevar.appstudio.object.function;
 import com.sharevar.appstudio.data.BaseObject;
 import com.sharevar.appstudio.object.Type;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Parameter extends BaseObject {
@@ -10,7 +11,7 @@ public class Parameter extends BaseObject {
     private String name;
     private Object defaultValue;
     private Object value;
-    private List<Option> options;
+    private List<Option> options=new ArrayList<>();
 
     public List<Option> getOptions() {
         return options;

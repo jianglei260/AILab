@@ -7,6 +7,8 @@ import com.sharevar.appstudio.R;
 import com.sharevar.appstudio.common.ds.CollectionOP;
 import com.sharevar.appstudio.common.string.StringUtil;
 import com.sharevar.appstudio.object.Statement;
+import com.sharevar.appstudio.object.function.FunctionGroup;
+import com.sharevar.appstudio.runtime.sdk.SDK;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -18,18 +20,33 @@ public class VM {
     private List<Statement> statements;
     private Map<String, String> nameMap;
     private Context context;
+    private SDK sdk;
+    private RuntimeContext runtimeContext;
 
     public static VM load(Context context) {
-        VM vm = new VM();
+        VM vm = new VM(context);
         return vm;
+    }
+
+
+    public void init() {
+        runtimeContext = new RuntimeContext();
+        runtimeContext.setContext(context);
+        sdk = SDK.getInstance(runtimeContext);
+    }
+
+    public List<FunctionGroup> getFunctionGroups() {
+        return sdk.getFunctionGroups();
     }
 
     public void run(List<Statement> statements) {
         this.statements = statements;
     }
 
-    VM() {
+    VM(Context context) {
+        this.context = context;
         nameMap = new HashMap<>();
+        init();
     }
 
     public List<String> getWords(String text) {

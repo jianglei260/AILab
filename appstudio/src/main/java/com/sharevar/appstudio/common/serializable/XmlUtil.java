@@ -4,6 +4,9 @@ import android.util.Xml;
 
 import com.sharevar.appstudio.common.ds.CollectionOP;
 import com.sharevar.appstudio.common.object.ObjectTool;
+import com.sharevar.appstudio.common.string.StringUtil;
+import com.sharevar.appstudio.object.Type;
+import com.sharevar.appstudio.stand.type.TypeInference;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -32,16 +35,27 @@ public class XmlUtil {
                         if (bean != null) {
                             Object object = bean.newInstance();
                             if (bean.equals(beans[0])) {
-                                list.add(bean);
+                                list.add(object);
                             } else {
                                 childList = getList(stack.peek());
-                                childList.add(bean);
+                                childList.add(object);
                             }
                             int count = parser.getAttributeCount();
                             for (int i = 0; i < count; i++) {
                                 String attrName = parser.getAttributeName(i);
                                 Method setMethod = ObjectTool.setMethod(bean, attrName);
-                                setMethod.invoke(object, parser.getAttributeValue(i));
+                                if (setMethod != null) {
+                                    Class paramType = setMethod.getParameterTypes()[0];
+                                    if (paramType.equals(Object.class)) {
+                                        String type = parser.getAttributeValue(null, "type");
+                                        if (!StringUtil.isNullOrEmpty(type)) {
+                                            paramType = Type.of(type).classType();
+                                        }
+                                    }
+                                    Object value = TypeInference.get().convertTo(parser.getAttributeValue(i), Type.of(paramType));
+                                    setMethod.invoke(object, value);
+                                }
+
                             }
                             stack.push(object);
                         }
@@ -52,6 +66,7 @@ public class XmlUtil {
                         }
                         break;
                 }
+                event = parser.next();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,7 +77,7 @@ public class XmlUtil {
     public static List getList(Object object) {
         Method[] methods = object.getClass().getMethods();
         for (Method method : methods) {
-            if (method.getReturnType().equals(List.class)) {
+            if (method.getReturnType().equals(List.class) && method.getName().startsWith("get")) {
                 try {
                     return (List) method.invoke(object);
                 } catch (Exception e) {

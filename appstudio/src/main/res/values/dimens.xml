@@ -100,5 +100,9 @@
     <!-- per https://developer.android.com/reference/android/view/ViewGroup.LayoutParams.html#MATCH_PARENT -->
     <item name="match_parent" format="integer" type="dimen">-1</item>
     <dimen name="child_left_margin">10dp</dimen>
+    <dimen name="list_divider_height">1px</dimen>
+    <dimen name="list_divider_height_negative">-1px</dimen>
+    <!-- Helper 系列界面 -->
+
 
 </resources>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#0ee118</color>
+    <color name="colorPrimaryDark">#06d225</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="tab_panel_bg">#ffffff</color>
+    <color name="bar_divider">#D4D6D8</color>
+    <color name="tab_panel_divider">@color/bar_divider</color>
 </resources>

@@ -1,10 +1,11 @@
 package com.sharevar.appstudio.object.function;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Mode {
     private String name;
-    private List<Parameter> parameters;
+    private List<Parameter> parameters=new ArrayList<>();
     private int paramsNum;
 
 

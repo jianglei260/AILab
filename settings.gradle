@@ -1,1 +1,1 @@
-include ':appstudio', ':study'
+include ':appstudio', ':study', ':compiler'

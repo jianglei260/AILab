@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <data>
-    <FuctionGroup name="ui">
+    <FunctionGroup name="ui">
         <Function name="View" adapter="com.sharevar.appstudio.runtime.sdk.ui.WidgetAdapter"
             parent="" returnType="com.sharevar.appstudio.data.Widget" tag="android.view.View">
             <Mode>
@@ -77,8 +76,8 @@
         </Function>
         <Function />
 
-    </FuctionGroup>
-    <FuctionGroup name="script">
+    </FunctionGroup>
+    <FunctionGroup name="script">
         <Function name="if" adapter="com.sharevar.appstudio.runtime.sdk.script.IfAdapter">
             <Mode name="graetThan" paramsNum="2" />
             <Mode name="equal" paramsNum="2" />
@@ -86,5 +85,5 @@
             <Mode name="notNull" paramsNum="1" />
             <Mode name="notEmpty" paramsNum="1" />
         </Function>
-    </FuctionGroup>
+    </FunctionGroup>
 </data>

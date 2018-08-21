@@ -68,13 +68,15 @@ public class ObjectTool {
         return null;
     }
 
-    public static Method setMethod(Class clazz,String name) {
+    public static Method setMethod(Class clazz, String name) {
         char[] chars = name.toCharArray();
         chars[0] = Character.toUpperCase(chars[0]);
         String methodName = "set" + String.valueOf(chars);
-        Method getMethod=getMethod(clazz, name);
+        Method getMethod = getMethod(clazz, name);
+        if (getMethod == null)
+            return null;
         try {
-            Method method = clazz.getMethod(methodName,getMethod.getReturnType());
+            Method method = clazz.getMethod(methodName, getMethod.getReturnType());
             return method;
         } catch (NoSuchMethodException e) {
             e.printStackTrace();

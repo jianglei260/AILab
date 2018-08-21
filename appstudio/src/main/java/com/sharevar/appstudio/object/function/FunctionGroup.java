@@ -1,12 +1,13 @@
-package com.sharevar.appstudio.runtime.core;
+package com.sharevar.appstudio.object.function;
 
 import com.sharevar.appstudio.object.function.Function;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FunctionGroup {
     private String name;
-    private List<Function> functions;
+    private List<Function> functions=new ArrayList<>();
 
     public String getName() {
         return name;

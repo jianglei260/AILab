@@ -20,6 +20,7 @@ import com.sharevar.appstudio.object.function.Function;
 import com.sharevar.appstudio.object.function.Parameter;
 import com.sharevar.appstudio.object.function.CodeBlock;
 import com.sharevar.appstudio.ui.base.BaseActivity;
+import com.sharevar.appstudio.ui.base.BaseFragment;
 import com.sharevar.appstudio.ui.common.RecyclerViewAdapter;
 import com.sharevar.appstudio.ui.common.RecyclerViewBinder;
 
@@ -34,32 +35,21 @@ public class PlaygroundActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_palyground);
-        recyclerView = findViewById(R.id.recycler_view);
-        title = findViewById(R.id.title);
-        initRecyclerView();
-        initRecyclerViewDrag();
-        initData();
-    }
-    public void initData(){
-        List<Statement> statements=new ArrayList<>();
-        Statement statement1=new Statement();
-        statement1.setFunction(new If());
-        Type type1=statement1.getFunction().getReturnType();
-        Variable variable1=new Variable();
-        variable1.setType(type1);
-        variable1.setName(type1.getName());
-        statement1.setRetVaule(variable1);
-        Statement statement2=new Statement();
-        statement2.setFunction(new Loop());
-        Type type2=statement2.getFunction().getReturnType();
-        Variable variable2=new Variable();
-        variable2.setType(type2);
-        variable2.setName(type2.getName());
-        statement2.setRetVaule(variable2);
-        statements.add(statement1);
-        statements.add(statement2);
-        setStatements(statements);
+//        setContentView(R.layout.activity_palyground);
+//        recyclerView = findViewById(R.id.recycler_view);
+//        title = findViewById(R.id.title);
+//        initRecyclerView();
+//        initRecyclerViewDrag();
+//        initData();
+        if (savedInstanceState == null) {
+            BaseFragment fragment = new FunctionListFragment();
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(getContextViewId(), fragment, fragment.getClass().getSimpleName())
+                    .addToBackStack(fragment.getClass().getSimpleName())
+                    .commit();
+        }
     }
 
     private void initRecyclerView() {

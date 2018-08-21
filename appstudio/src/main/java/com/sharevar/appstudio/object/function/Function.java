@@ -25,6 +25,7 @@ public class Function extends BaseObject {
     protected String adapter;
     protected String parent;
 
+    protected String desc;
     private RuntimeContext runtimeContext;
 
     private int modeIndex;
@@ -80,6 +81,13 @@ public class Function extends BaseObject {
         return null;
     }
 
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 
     public int getModeIndex() {
         return modeIndex;

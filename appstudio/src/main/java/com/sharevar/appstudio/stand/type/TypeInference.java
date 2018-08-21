@@ -2,6 +2,7 @@ package com.sharevar.appstudio.stand.type;
 
 import android.util.Log;
 
+import com.sharevar.appstudio.object.Type;
 import com.sharevar.appstudio.stand.type.graph.DirectedGraph;
 
 import java.lang.reflect.InvocationTargetException;
