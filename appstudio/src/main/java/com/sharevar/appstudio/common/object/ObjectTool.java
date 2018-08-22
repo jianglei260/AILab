@@ -3,6 +3,7 @@ package com.sharevar.appstudio.common.object;
 import com.sharevar.appstudio.common.string.StringUtil;
 import com.sharevar.appstudio.data.Attr;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,13 +73,16 @@ public class ObjectTool {
         char[] chars = name.toCharArray();
         chars[0] = Character.toUpperCase(chars[0]);
         String methodName = "set" + String.valueOf(chars);
-        Method getMethod = getMethod(clazz, name);
-        if (getMethod == null)
-            return null;
         try {
-            Method method = clazz.getMethod(methodName, getMethod.getReturnType());
+            Class retType = null;
+            try {
+                retType = clazz.getDeclaredField(name).getType();
+            } catch (Exception e) {
+                return null;
+            }
+            Method method = clazz.getMethod(methodName, retType);
             return method;
-        } catch (NoSuchMethodException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

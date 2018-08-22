@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.qmuiteam.qmui.arch.QMUIFragmentActivity;
+import com.sharevar.appstudio.R;
 
 
 /**
@@ -56,7 +57,7 @@ public class BaseActivity extends QMUIFragmentActivity {
 
     @Override
     protected int getContextViewId() {
-        return 0;
+        return R.id.app_studio;
     }
 
     @Override

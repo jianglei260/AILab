@@ -47,7 +47,15 @@ public class ConvertFactory {
         return Long.valueOf(value);
     }
 
+    public static int toInt(String value) {
+        return Integer.valueOf(value);
+    }
+
     public static Boolean toBoolean(String value) {
+        return Boolean.parseBoolean(value);
+    }
+
+    public static boolean toboolean(String value) {
         return Boolean.parseBoolean(value);
     }
 

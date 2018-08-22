@@ -5,21 +5,21 @@
             <Mode>
                 <Parameter name="layoutWidth" defaultValue="-1" require="true"
                     type="java.lang.Integer">
-                    <Option name="MATCH_PARENT" value="-1" />
-                    <Option name="WRAP_CONTENT" value="-2" />
+                    <Option name="MATCH_PARENT" value="-1" type="java.lang.Integer"/>
+                    <Option name="WRAP_CONTENT" value="-2" type="java.lang.Integer"/>
                 </Parameter>
                 <Parameter name="layoutHeight" defaultValue="-1" require="true"
                     type="java.lang.Integer">
-                    <Option name="MATCH_PARENT" value="-1" />
-                    <Option name="WRAP_CONTENT" value="-2" />
+                    <Option name="MATCH_PARENT" value="-1" type="java.lang.Integer"/>
+                    <Option name="WRAP_CONTENT" value="-2" type="java.lang.Integer"/>
                 </Parameter>
                 <Parameter name="padding" defaultValue="-1" type="java.lang.Integer">
-                    <Option name="8dp" value="8" />
-                    <Option name="10dp" value="10" />
+                    <Option name="8dp" value="8" type="java.lang.Integer"/>
+                    <Option name="10dp" value="10" type="java.lang.Integer"/>
                 </Parameter>
                 <Parameter name="margin" defaultValue="-1" type="java.lang.Integer">
-                    <Option name="8dp" value="8" />
-                    <Option name="10dp" value="10" />
+                    <Option name="8dp" value="8" type="java.lang.Integer"/>
+                    <Option name="10dp" value="10" type="java.lang.Integer"/>
                 </Parameter>
                 <Parameter name="background">
 
@@ -31,8 +31,8 @@
             tag="android.widget.LinearLayout">
             <Mode>
                 <Parameter name="oriention" defaultValue="1" type="java.lang.Integer">
-                    <Option name="VERTICAL" value="1" />
-                    <Option name="HORIZONTAL" value="0" />
+                    <Option name="VERTICAL" value="1" type="java.lang.Integer"/>
+                    <Option name="HORIZONTAL" value="0" type="java.lang.Integer"/>
                 </Parameter>
             </Mode>
         </Function>
@@ -74,8 +74,6 @@
                 <Parameter name="radius" type="java.lang.Integer" />
             </Mode>
         </Function>
-        <Function />
-
     </FunctionGroup>
     <FunctionGroup name="script">
         <Function name="if" adapter="com.sharevar.appstudio.runtime.sdk.script.IfAdapter">

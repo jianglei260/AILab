@@ -61,7 +61,7 @@ public class XmlUtil {
                         }
                         break;
                     case XmlPullParser.END_TAG:
-                        if (stack.peek().getClass().getSimpleName().equals(parser.getName())) {
+                        if (!stack.isEmpty() && stack.peek().getClass().getSimpleName().equals(parser.getName())) {
                             stack.pop();
                         }
                         break;

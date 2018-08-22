@@ -8,7 +8,7 @@
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/colorPrimary">
+        android:background="?attr/app_primary_color">
 
         <TextView
             android:id="@+id/title"
@@ -32,6 +32,6 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/title_bar" />
+        android:layout_below="@+id/title_bar" />
 
 </RelativeLayout>

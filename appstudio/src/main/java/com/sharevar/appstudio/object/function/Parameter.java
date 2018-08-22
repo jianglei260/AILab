@@ -11,7 +11,16 @@ public class Parameter extends BaseObject {
     private String name;
     private Object defaultValue;
     private Object value;
+    private boolean require;
     private List<Option> options=new ArrayList<>();
+
+    public boolean isRequire() {
+        return require;
+    }
+
+    public void setRequire(boolean require) {
+        this.require = require;
+    }
 
     public List<Option> getOptions() {
         return options;

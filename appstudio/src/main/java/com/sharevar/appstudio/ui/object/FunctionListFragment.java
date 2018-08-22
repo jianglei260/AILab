@@ -82,9 +82,6 @@ public class FunctionListFragment extends BaseFragment {
     }
 
     private void initTabAndPager() {
-        mContentViewPager.setAdapter(mPagerAdapter);
-        mContentViewPager.setCurrentItem(0, false);
-
         for (FunctionGroup functionGroup : functionGroups) {
             mTabSegment.addTab(new QMUITabSegment.Tab(functionGroup.getName()));
         }
@@ -94,6 +91,9 @@ public class FunctionListFragment extends BaseFragment {
         mTabSegment.setItemSpaceInScrollMode(space);
         mTabSegment.setupWithViewPager(mContentViewPager, false);
         mTabSegment.setPadding(space, 0, space, 0);
+        mContentViewPager.setAdapter(mPagerAdapter);
+        mContentViewPager.setCurrentItem(0, false);
+
     }
 
     public View getPageView(FunctionGroup functionGroup) {
@@ -104,7 +104,7 @@ public class FunctionListFragment extends BaseFragment {
             recyclerView.setLayoutParams(layoutParams);
             view = recyclerView;
             mPageMap.put(functionGroup, view);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
             RecyclerViewAdapter adapter=new RecyclerViewAdapter();
             adapter.register(Function.class, R.layout.list_item_repo_function, new RecyclerViewBinder<Function>() {
                 @Override
