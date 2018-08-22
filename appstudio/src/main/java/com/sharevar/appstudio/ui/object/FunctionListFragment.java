@@ -14,6 +14,7 @@ import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.sharevar.appstudio.R;
+import com.sharevar.appstudio.object.Statement;
 import com.sharevar.appstudio.object.function.Function;
 import com.sharevar.appstudio.object.function.FunctionGroup;
 import com.sharevar.appstudio.runtime.core.VM;
@@ -96,6 +97,12 @@ public class FunctionListFragment extends BaseFragment {
 
     }
 
+    public void insertStatement(Function function){
+        Statement statement=new Statement();
+        statement.setFunction(function);
+        ((PlaygroundActivity)getActivity()).getFragment().insertStatement(statement);
+    }
+
     public View getPageView(FunctionGroup functionGroup) {
         View view = mPageMap.get(functionGroup);
         if (view == null) {
@@ -108,9 +115,16 @@ public class FunctionListFragment extends BaseFragment {
             RecyclerViewAdapter adapter=new RecyclerViewAdapter();
             adapter.register(Function.class, R.layout.list_item_repo_function, new RecyclerViewBinder<Function>() {
                 @Override
-                public void bind(Function function) {
+                public void bind(final Function function) {
                     textView(R.id.fun_name).setText(function.getName());
                     textView(R.id.fun_desc).setText(function.getDesc());
+                    viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            insertStatement(function);
+                            popBackStack();
+                        }
+                    });
                 }
             });
             recyclerView.setAdapter(adapter);

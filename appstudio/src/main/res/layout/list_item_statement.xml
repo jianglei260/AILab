@@ -7,11 +7,11 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="64dp">
 
         <TextView
             android:id="@+id/index"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true" />
 
@@ -19,13 +19,12 @@
             android:id="@+id/fun_return"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
-            android:layout_below="@id/fun_name"
             android:layout_toRightOf="@id/index" />
 
         <TextView
             android:id="@+id/fun_name"
             android:layout_width="match_parent"
-            android:layout_height="32dp"
+            android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/fun_return" />
 
         <ImageView

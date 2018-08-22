@@ -18,7 +18,7 @@
         </activity>
         <activity android:name=".runtime.ui.ContainerActivity" />
         <activity android:name=".runtime.ui.NavigateActivity"></activity>
-        <activity android:name=".ui.object.ObjectEditActivity"/>
+        <activity android:name=".ui.object.ObjectEditFragment"/>
         <activity android:name=".ui.object.PlaygroundActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
