@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
@@ -19,6 +21,7 @@ import com.sharevar.appstudio.object.Statement;
 import com.sharevar.appstudio.object.Variable;
 import com.sharevar.appstudio.object.function.CodeBlock;
 import com.sharevar.appstudio.object.function.Function;
+import com.sharevar.appstudio.object.function.Mode;
 import com.sharevar.appstudio.object.function.Parameter;
 import com.sharevar.appstudio.ui.base.BaseFragment;
 import com.sharevar.appstudio.ui.common.RecyclerViewAdapter;
@@ -30,17 +33,19 @@ import java.util.List;
 public class PlaygroundFragment extends BaseFragment {
     RecyclerView recyclerView;
     QMUITopBar mTopBar;
-    List<ItemWrapper<Statement>> itemWrappers=new ArrayList<>();
+    List<ItemWrapper<Statement>> itemWrappers = new ArrayList<>();
+
     @Override
     protected View onCreateView() {
-        View root= LayoutInflater.from(getActivity()).inflate(R.layout.fragment_palyground,null);
+        View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_palyground, null);
         recyclerView = root.findViewById(R.id.recycler_view);
-        mTopBar=root.findViewById(R.id.topbar);
+        mTopBar = root.findViewById(R.id.topbar);
         initTopBar();
         initRecyclerView();
         initRecyclerViewDrag();
         return root;
     }
+
     private void initRecyclerView() {
         final RecyclerViewAdapter adapter = new RecyclerViewAdapter();
         adapter.register((Class<ItemWrapper<Statement>>) new TypeToken<ItemWrapper<Statement>>() {
@@ -49,29 +54,59 @@ public class PlaygroundFragment extends BaseFragment {
             public void bind(ItemWrapper<Statement> itemWrapper) {
                 textView(R.id.index).setText(String.valueOf(itemWrappers.indexOf(itemWrapper)));
                 ViewGroup.MarginLayoutParams marginLayoutParams = ((ViewGroup.MarginLayoutParams) viewHolder.itemView.getLayoutParams());
-                marginLayoutParams.leftMargin = getResources().getDimensionPixelOffset(R.dimen.child_left_margin) * itemWrapper.getDepth();
+                marginLayoutParams.leftMargin = marginLayoutParams.leftMargin + getResources().getDimensionPixelOffset(R.dimen.child_left_margin) * itemWrapper.getDepth();
                 Function function = itemWrapper.getObject().getFunction();
                 Variable variable = itemWrapper.getObject().getRetVaule();
                 textView(R.id.fun_name).setText(function.getName());
-                if (variable!=null){
+                final LinearLayout parameterLayout = linearLayout(R.id.fun_params);
+                RadioGroup radioGroup = (RadioGroup) view(R.id.radio_group);
+                if (variable != null) {
                     textView(R.id.fun_return).setText(variable.getName());
                 }
-                LinearLayout parameterLayout = linearLayout(R.id.fun_params);
-                for (Parameter parameter : function.getParameters()) {
-                    if (parameter.getType() != null) {
-                        String typeName = parameter.getType().getName();
-                        ParameterAdapter parameterAdapter = ParameterAdapterManager.getInstance().get(typeName);
-                        if (parameterAdapter != null) {
-                            parameterAdapter.nameText().setText(parameter.getName());
-                            parameterLayout.addView(parameterAdapter.getView());
+                final List<Mode> modes = function.getModes();
+                if (modes.size() > 1) {
+                    initRadioGroup(radioGroup, modes);
+                    radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(RadioGroup group, int checkedId) {
+                            initParams(parameterLayout, modes.get(checkedId).getParameters());
                         }
-                    }
+                    });
+                } else {
+
                 }
+                radioGroup.check(0);
             }
         });
         recyclerView.setAdapter(adapter);
         adapter.setItems(itemWrappers);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+    }
+
+    public void initParams(LinearLayout container, List<Parameter> parameters) {
+        for (Parameter parameter : parameters) {
+            if (parameter.getType() != null) {
+                String typeName = parameter.getType().getName();
+                ParameterAdapter parameterAdapter = ParameterAdapterManager.getInstance().get(typeName);
+                if (parameterAdapter != null) {
+                    parameterAdapter.nameText().setText(parameter.getName());
+                    container.addView(parameterAdapter.getView());
+                }
+            }
+        }
+    }
+
+    public void initRadioGroup(RadioGroup radioGroup, List<Mode> modes) {
+        for (int i = 0; i < modes.size(); i++) {
+            RadioButton radioButton = new RadioButton(getActivity());
+            radioButton.setButtonDrawable(null);
+            radioButton.setBackground(getResources().getDrawable(R.drawable.s_radio_button_bg));
+            int padding = 12;
+            radioButton.setPadding(padding, padding, padding, padding);
+            radioButton.setId(i);
+            radioButton.setText(modes.get(i).getName());
+            radioGroup.addView(radioButton);
+        }
     }
 
     private void initTopBar() {
@@ -80,7 +115,7 @@ public class PlaygroundFragment extends BaseFragment {
         mTopBar.addRightImageButton(R.drawable.ic_add_light, R.id.topbar_right_about_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FunctionListFragment functionListFragment=new FunctionListFragment();
+                FunctionListFragment functionListFragment = new FunctionListFragment();
                 startFragment(functionListFragment);
             }
         });
@@ -171,13 +206,13 @@ public class PlaygroundFragment extends BaseFragment {
     }
 
 
-    public  void moveStatement(int srcPostion, int targetPosition) {
+    public void moveStatement(int srcPostion, int targetPosition) {
         ItemWrapper<Statement> targetItem = itemWrappers.get(targetPosition);
         ItemWrapper<Statement> srcItem = itemWrappers.get(srcPostion);
         int depth = srcItem.getDepth();
         srcItem.setDepth(targetItem.getDepth());
         srcItem.setParent(targetItem.getParent());
-        itemWrappers.add(targetPosition,srcItem);
+        itemWrappers.add(targetPosition, srcItem);
 
     }
 
@@ -198,7 +233,7 @@ public class PlaygroundFragment extends BaseFragment {
 
     public void insertStatement(Statement statement) {
         //todo
-        ItemWrapper<Statement> itemWrapper=new ItemWrapper<>();
+        ItemWrapper<Statement> itemWrapper = new ItemWrapper<>();
         itemWrapper.setObject(statement);
         itemWrappers.add(itemWrapper);
         recyclerView.getAdapter().notifyDataSetChanged();
@@ -232,7 +267,7 @@ public class PlaygroundFragment extends BaseFragment {
 
     public void setStatements(List<Statement> statements) {
         itemWrappers = toItemWrapper(statements);
-        ((RecyclerViewAdapter)recyclerView.getAdapter()).setItems(itemWrappers);
+        ((RecyclerViewAdapter) recyclerView.getAdapter()).setItems(itemWrappers);
         recyclerView.getAdapter().notifyDataSetChanged();
     }
 
