@@ -60,6 +60,7 @@ public class PlaygroundFragment extends BaseFragment {
                 textView(R.id.fun_name).setText(function.getName());
                 final LinearLayout parameterLayout = linearLayout(R.id.fun_params);
                 RadioGroup radioGroup = (RadioGroup) view(R.id.radio_group);
+                radioGroup.removeAllViews();
                 if (variable != null) {
                     textView(R.id.fun_return).setText(variable.getName());
                 }

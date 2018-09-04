@@ -17,7 +17,7 @@ import me.tatarka.bindingcollectionadapter.BindingRecyclerViewAdapter;
 
 public class RecyclerViewAdapter extends MultiTypeAdapter {
 
-    public static class ItemViewHolder extends RecyclerView.ViewHolder {
+    public  class ItemViewHolder extends RecyclerView.ViewHolder {
         private Map<Integer, View> holderMap = new HashMap<>();
 
         public ItemViewHolder(View itemView) {
@@ -36,10 +36,10 @@ public class RecyclerViewAdapter extends MultiTypeAdapter {
     }
 
     public <T> void register(Class<? extends T> clazz, @LayoutRes final int layoutRes, final RecyclerViewBinder<T> binder) {
-        super.register(clazz, new ItemViewBinder<T, RecyclerView.ViewHolder>() {
+        super.register(clazz, new ItemViewBinder<T, ItemViewHolder>() {
             @NonNull
             @Override
-            protected RecyclerView.ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
+            protected ItemViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
                 View root = inflater.inflate(layoutRes, parent, false);
                 ItemViewHolder viewHolder = new ItemViewHolder(root);
                 binder.setViewHolder(viewHolder);
@@ -47,7 +47,8 @@ public class RecyclerViewAdapter extends MultiTypeAdapter {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @NonNull T item) {
+            protected void onBindViewHolder(@NonNull ItemViewHolder holder, @NonNull T item) {
+                binder.setViewHolder(holder);
                 binder.bind(item);
             }
         });
