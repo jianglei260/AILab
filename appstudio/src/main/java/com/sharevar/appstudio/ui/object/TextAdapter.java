@@ -6,6 +6,10 @@ import android.widget.TextView;
 import com.sharevar.appstudio.object.function.Parameter;
 
 public class TextAdapter extends ParameterAdapter {
+    public TextAdapter(Parameter parameter) {
+        super(parameter);
+    }
+
     @Override
     public View getView() {
         return null;

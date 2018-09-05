@@ -1,6 +1,7 @@
 package com.sharevar.appstudio.ui.object;
 
 import android.animation.ObjectAnimator;
+import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -52,7 +53,7 @@ public class PlaygroundFragment extends BaseFragment {
         }.getRawType(), R.layout.list_item_statement, new RecyclerViewBinder<ItemWrapper<Statement>>() {
             @Override
             public void bind(ItemWrapper<Statement> itemWrapper) {
-                textView(R.id.index).setText(String.valueOf(itemWrappers.indexOf(itemWrapper)));
+//                textView(R.id.index).setText(String.valueOf(itemWrappers.indexOf(itemWrapper)));
                 ViewGroup.MarginLayoutParams marginLayoutParams = ((ViewGroup.MarginLayoutParams) viewHolder.itemView.getLayoutParams());
                 marginLayoutParams.leftMargin = marginLayoutParams.leftMargin + getResources().getDimensionPixelOffset(R.dimen.child_left_margin) * itemWrapper.getDepth();
                 Function function = itemWrapper.getObject().getFunction();
@@ -74,7 +75,7 @@ public class PlaygroundFragment extends BaseFragment {
                         }
                     });
                 } else {
-
+                    initParams(parameterLayout, modes.get(0).getParameters());
                 }
                 radioGroup.check(0);
             }
@@ -85,13 +86,22 @@ public class PlaygroundFragment extends BaseFragment {
     }
 
     public void initParams(LinearLayout container, List<Parameter> parameters) {
+        int num=0;
+        container.removeAllViews();
         for (Parameter parameter : parameters) {
             if (parameter.getType() != null) {
-                String typeName = parameter.getType().getName();
-                ParameterAdapter parameterAdapter = ParameterAdapterManager.getInstance().get(typeName);
-                if (parameterAdapter != null) {
-                    parameterAdapter.nameText().setText(parameter.getName());
-                    container.addView(parameterAdapter.getView());
+                ParameterAdapter parameterAdapter = ParameterAdapterManager.getInstance(getActivity()).get(parameter);
+                if (parameterAdapter == null) {
+                    parameterAdapter=ParameterAdapterManager.getInstance(getActivity()).getDefault(parameter);
+                }
+                View view=parameterAdapter.getView();
+                container.addView(view);
+                if (num<parameters.size()){
+                    View line=new View(getActivity());
+                    line.setBackgroundColor(getActivity().getResources().getColor(R.color.play_frgment_card_background));
+                    LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,getResources().getDimensionPixelSize(R.dimen.list_divider_height));
+                    params.leftMargin=getResources().getDimensionPixelSize(R.dimen.child_left_margin);
+                    container.addView(line,params);
                 }
             }
         }
