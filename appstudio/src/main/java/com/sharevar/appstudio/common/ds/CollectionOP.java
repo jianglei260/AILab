@@ -26,4 +26,12 @@ public class CollectionOP<T> {
     public static <T> T findByAttr(T[] collection, String attr, Object value) {
         return findByAttr(Arrays.asList(collection), attr, value);
     }
+
+    public static  <T>   int indexOf(T[] collection,T value){
+        for (int i = 0; i < collection.length; i++) {
+            if (collection[i].equals(value))
+                return i;
+        }
+        return -1;
+    }
 }

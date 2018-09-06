@@ -24,7 +24,9 @@ import com.sharevar.appstudio.object.function.CodeBlock;
 import com.sharevar.appstudio.object.function.Function;
 import com.sharevar.appstudio.object.function.Mode;
 import com.sharevar.appstudio.object.function.Parameter;
+import com.sharevar.appstudio.runtime.sdk.script.IfAdapter;
 import com.sharevar.appstudio.ui.base.BaseFragment;
+import com.sharevar.appstudio.ui.common.ClassLinkRule;
 import com.sharevar.appstudio.ui.common.RecyclerViewAdapter;
 import com.sharevar.appstudio.ui.common.RecyclerViewBinder;
 
@@ -35,22 +37,52 @@ public class PlaygroundFragment extends BaseFragment {
     RecyclerView recyclerView;
     QMUITopBar mTopBar;
     List<ItemWrapper<Statement>> itemWrappers = new ArrayList<>();
-
+    ClassLinkRule rule;
     @Override
     protected View onCreateView() {
         View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_palyground, null);
         recyclerView = root.findViewById(R.id.recycler_view);
         mTopBar = root.findViewById(R.id.topbar);
+        initRule();
         initTopBar();
         initRecyclerView();
         initRecyclerViewDrag();
         return root;
     }
 
+    public void initRule(){
+        rule=new ClassLinkRule() {
+            @Override
+            public Class keyType(Object o) {
+             try {
+                 ItemWrapper<Statement> itemWrapper= (ItemWrapper<Statement>) o;
+                 String type=itemWrapper.getObject().getFunction().getAdapter();
+                 return Class.forName(type);
+             }catch (Exception e){
+                 e.printStackTrace();
+             }
+                return o.getClass();
+            }
+        };
+        rule.add(IfAdapter.class,IfRecyclerViewBinder.class);
+    }
+
+    public static class IfRecyclerViewBinder extends RecyclerViewBinder<ItemWrapper<Statement>>{
+
+        @Override
+        public void bind(ItemWrapper<Statement> itemWrapper) {
+
+        }
+
+        @Override
+        public int layoutRes() {
+            return 0;
+        }
+    }
     private void initRecyclerView() {
         final RecyclerViewAdapter adapter = new RecyclerViewAdapter();
         adapter.register((Class<ItemWrapper<Statement>>) new TypeToken<ItemWrapper<Statement>>() {
-        }.getRawType(), R.layout.list_item_statement, new RecyclerViewBinder<ItemWrapper<Statement>>() {
+        }.getRawType(), new RecyclerViewBinder<ItemWrapper<Statement>>() {
             @Override
             public void bind(ItemWrapper<Statement> itemWrapper) {
 //                textView(R.id.index).setText(String.valueOf(itemWrappers.indexOf(itemWrapper)));
@@ -78,6 +110,11 @@ public class PlaygroundFragment extends BaseFragment {
                     initParams(parameterLayout, modes.get(0).getParameters());
                 }
                 radioGroup.check(0);
+            }
+
+            @Override
+            public int layoutRes() {
+                return R.layout.list_item_statement;
             }
         });
         recyclerView.setAdapter(adapter);

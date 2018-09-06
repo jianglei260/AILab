@@ -1,6 +1,7 @@
 package com.sharevar.appstudio.ui.common;
 
 import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -40,4 +41,6 @@ public abstract class RecyclerViewBinder<T> {
     }
 
     public abstract void bind(T t);
+
+    public abstract @LayoutRes int layoutRes();
 }

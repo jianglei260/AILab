@@ -113,7 +113,7 @@ public class FunctionListFragment extends BaseFragment {
             mPageMap.put(functionGroup, view);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
             RecyclerViewAdapter adapter=new RecyclerViewAdapter();
-            adapter.register(Function.class, R.layout.list_item_repo_function, new RecyclerViewBinder<Function>() {
+            adapter.register(Function.class,new RecyclerViewBinder<Function>() {
                 @Override
                 public void bind(final Function function) {
                     textView(R.id.fun_name).setText(function.getName());
@@ -125,6 +125,11 @@ public class FunctionListFragment extends BaseFragment {
                             popBackStack();
                         }
                     });
+                }
+
+                @Override
+                public int layoutRes() {
+                    return  R.layout.list_item_repo_function;
                 }
             });
             recyclerView.setAdapter(adapter);
