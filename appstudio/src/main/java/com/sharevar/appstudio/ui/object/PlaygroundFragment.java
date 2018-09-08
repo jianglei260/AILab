@@ -1,7 +1,6 @@
 package com.sharevar.appstudio.ui.object;
 
 import android.animation.ObjectAnimator;
-import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -12,18 +11,17 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.qmuiteam.qmui.widget.QMUITopBar;
-import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.sharevar.appstudio.R;
-import com.sharevar.appstudio.object.Statement;
-import com.sharevar.appstudio.object.Variable;
-import com.sharevar.appstudio.object.function.CodeBlock;
-import com.sharevar.appstudio.object.function.Function;
-import com.sharevar.appstudio.object.function.Mode;
-import com.sharevar.appstudio.object.function.Parameter;
+import com.sharevar.appstudio.runtime.core.statement.Statement;
+import com.sharevar.appstudio.runtime.core.var.Variable;
+import com.sharevar.appstudio.runtime.core.function.CodeBlock;
+import com.sharevar.appstudio.runtime.core.function.Function;
+import com.sharevar.appstudio.runtime.core.function.Mode;
+import com.sharevar.appstudio.runtime.core.function.Parameter;
+import com.sharevar.appstudio.runtime.sdk.FunctionAdapter;
 import com.sharevar.appstudio.runtime.sdk.script.IfAdapter;
 import com.sharevar.appstudio.ui.base.BaseFragment;
 import com.sharevar.appstudio.ui.common.ClassLinkRule;
@@ -38,36 +36,89 @@ public class PlaygroundFragment extends BaseFragment {
     QMUITopBar mTopBar;
     List<ItemWrapper<Statement>> itemWrappers = new ArrayList<>();
     ClassLinkRule rule;
+    RecyclerViewBinder[] recyclerViewBinders;
+
     @Override
     protected View onCreateView() {
         View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_palyground, null);
         recyclerView = root.findViewById(R.id.recycler_view);
         mTopBar = root.findViewById(R.id.topbar);
         initRule();
+        initBinders(DefaultRecyclerViewBinder.class,IfRecyclerViewBinder.class, ElseRecyclerViewBinder.class, EndRecyclerViewBinder.class);
         initTopBar();
         initRecyclerView();
         initRecyclerViewDrag();
         return root;
     }
 
-    public void initRule(){
-        rule=new ClassLinkRule() {
+    public void initRule() {
+        rule = new ClassLinkRule() {
             @Override
             public Class keyType(Object o) {
-             try {
-                 ItemWrapper<Statement> itemWrapper= (ItemWrapper<Statement>) o;
-                 String type=itemWrapper.getObject().getFunction().getAdapter();
-                 return Class.forName(type);
-             }catch (Exception e){
-                 e.printStackTrace();
-             }
+                try {
+                    ItemWrapper<Statement> itemWrapper = (ItemWrapper<Statement>) o;
+                    return Class.forName(itemWrapper.getObject().getBinderClass());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 return o.getClass();
             }
         };
-        rule.add(IfAdapter.class,IfRecyclerViewBinder.class);
+        rule.add(DefaultRecyclerViewBinder.class, DefaultRecyclerViewBinder.class);
+        rule.add(IfRecyclerViewBinder.class, IfRecyclerViewBinder.class);
+        rule.add(ElseRecyclerViewBinder.class, ElseRecyclerViewBinder.class);
+        rule.add(EndRecyclerViewBinder.class, EndRecyclerViewBinder.class);
     }
 
-    public static class IfRecyclerViewBinder extends RecyclerViewBinder<ItemWrapper<Statement>>{
+
+    public void initBinders(Class<? extends RecyclerViewBinder>... binderClasses) {
+        recyclerViewBinders = new RecyclerViewBinder[binderClasses.length];
+        for (int i = 0; i < binderClasses.length; i++) {
+            try {
+                recyclerViewBinders[i] = binderClasses[i].getConstructor(PlaygroundFragment.class).newInstance(this);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public class DefaultRecyclerViewBinder extends RecyclerViewBinder<ItemWrapper<Statement>> {
+        @Override
+        public void bind(ItemWrapper<Statement> itemWrapper) {
+            //                textView(R.id.index).setText(String.valueOf(itemWrappers.indexOf(itemWrapper)));
+            ViewGroup.MarginLayoutParams marginLayoutParams = ((ViewGroup.MarginLayoutParams) viewHolder.itemView.getLayoutParams());
+            marginLayoutParams.leftMargin = marginLayoutParams.leftMargin + getResources().getDimensionPixelOffset(R.dimen.child_left_margin) * itemWrapper.getDepth();
+            Function function = itemWrapper.getObject().getFunction();
+            Variable variable = itemWrapper.getObject().getRetVaule();
+            textView(R.id.fun_name).setText(function.getName());
+            final LinearLayout parameterLayout = linearLayout(R.id.fun_params);
+            RadioGroup radioGroup = (RadioGroup) view(R.id.radio_group);
+            radioGroup.removeAllViews();
+            if (variable != null) {
+                textView(R.id.fun_return).setText(variable.getName());
+            }
+            final List<Mode> modes = function.getModes();
+            if (modes.size() > 1) {
+                initRadioGroup(radioGroup, modes);
+                radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        initParams(parameterLayout, modes.get(checkedId).getParameters());
+                    }
+                });
+            } else {
+                initParams(parameterLayout, modes.get(0).getParameters());
+            }
+            radioGroup.check(0);
+        }
+
+        @Override
+        public int layoutRes() {
+            return R.layout.list_item_statement;
+        }
+    }
+
+    public  class IfRecyclerViewBinder extends RecyclerViewBinder<ItemWrapper<Statement>> {
 
         @Override
         public void bind(ItemWrapper<Statement> itemWrapper) {
@@ -79,66 +130,59 @@ public class PlaygroundFragment extends BaseFragment {
             return 0;
         }
     }
+
+    public  class ElseRecyclerViewBinder extends RecyclerViewBinder<ItemWrapper<Statement>> {
+
+        @Override
+        public void bind(ItemWrapper<Statement> itemWrapper) {
+
+        }
+
+        @Override
+        public int layoutRes() {
+            return R.layout.list_item_else;
+        }
+    }
+
+    public  class EndRecyclerViewBinder extends RecyclerViewBinder<ItemWrapper<Statement>> {
+
+        @Override
+        public void bind(ItemWrapper<Statement> itemWrapper) {
+
+        }
+
+        @Override
+        public int layoutRes() {
+            return R.layout.list_item_end;
+        }
+    }
+
     private void initRecyclerView() {
         final RecyclerViewAdapter adapter = new RecyclerViewAdapter();
-        adapter.register((Class<ItemWrapper<Statement>>) new TypeToken<ItemWrapper<Statement>>() {
-        }.getRawType(), new RecyclerViewBinder<ItemWrapper<Statement>>() {
-            @Override
-            public void bind(ItemWrapper<Statement> itemWrapper) {
-//                textView(R.id.index).setText(String.valueOf(itemWrappers.indexOf(itemWrapper)));
-                ViewGroup.MarginLayoutParams marginLayoutParams = ((ViewGroup.MarginLayoutParams) viewHolder.itemView.getLayoutParams());
-                marginLayoutParams.leftMargin = marginLayoutParams.leftMargin + getResources().getDimensionPixelOffset(R.dimen.child_left_margin) * itemWrapper.getDepth();
-                Function function = itemWrapper.getObject().getFunction();
-                Variable variable = itemWrapper.getObject().getRetVaule();
-                textView(R.id.fun_name).setText(function.getName());
-                final LinearLayout parameterLayout = linearLayout(R.id.fun_params);
-                RadioGroup radioGroup = (RadioGroup) view(R.id.radio_group);
-                radioGroup.removeAllViews();
-                if (variable != null) {
-                    textView(R.id.fun_return).setText(variable.getName());
-                }
-                final List<Mode> modes = function.getModes();
-                if (modes.size() > 1) {
-                    initRadioGroup(radioGroup, modes);
-                    radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(RadioGroup group, int checkedId) {
-                            initParams(parameterLayout, modes.get(checkedId).getParameters());
-                        }
-                    });
-                } else {
-                    initParams(parameterLayout, modes.get(0).getParameters());
-                }
-                radioGroup.check(0);
-            }
-
-            @Override
-            public int layoutRes() {
-                return R.layout.list_item_statement;
-            }
-        });
+        adapter.register(new TypeToken<ItemWrapper<Statement>>() {
+        }.getRawType(), rule, recyclerViewBinders);
         recyclerView.setAdapter(adapter);
         adapter.setItems(itemWrappers);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
     }
 
     public void initParams(LinearLayout container, List<Parameter> parameters) {
-        int num=0;
+        int num = 0;
         container.removeAllViews();
         for (Parameter parameter : parameters) {
             if (parameter.getType() != null) {
                 ParameterAdapter parameterAdapter = ParameterAdapterManager.getInstance(getActivity()).get(parameter);
                 if (parameterAdapter == null) {
-                    parameterAdapter=ParameterAdapterManager.getInstance(getActivity()).getDefault(parameter);
+                    parameterAdapter = ParameterAdapterManager.getInstance(getActivity()).getDefault(parameter);
                 }
-                View view=parameterAdapter.getView();
+                View view = parameterAdapter.getView();
                 container.addView(view);
-                if (num<parameters.size()){
-                    View line=new View(getActivity());
+                if (num < parameters.size()) {
+                    View line = new View(getActivity());
                     line.setBackgroundColor(getActivity().getResources().getColor(R.color.play_frgment_card_background));
-                    LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,getResources().getDimensionPixelSize(R.dimen.list_divider_height));
-                    params.leftMargin=getResources().getDimensionPixelSize(R.dimen.child_left_margin);
-                    container.addView(line,params);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelSize(R.dimen.list_divider_height));
+                    params.leftMargin = getResources().getDimensionPixelSize(R.dimen.child_left_margin);
+                    container.addView(line, params);
                 }
             }
         }
@@ -177,7 +221,7 @@ public class PlaygroundFragment extends BaseFragment {
 
             @Override
             public boolean isItemViewSwipeEnabled() {
-                return true;
+                return false;
             }
 
             @Override
@@ -242,17 +286,22 @@ public class PlaygroundFragment extends BaseFragment {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 // 将数据集中的数据移除
-                ItemWrapper<Statement> itemWrapper = itemWrappers.remove(viewHolder.getAdapterPosition());
-                if (itemWrapper.getDepth() > 0) {
-                    CodeBlock codeBlock = (CodeBlock) itemWrapper.getParent().getParent().getObject();
-                    codeBlock.getStatements().remove(itemWrapper.getObject());
-                }
-                // 刷新列表
-                adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+
             }
         }).attachToRecyclerView(recyclerView);
     }
 
+
+    public void removeStatement(RecyclerView.ViewHolder viewHolder) {
+        //todo
+        ItemWrapper<Statement> itemWrapper = itemWrappers.remove(viewHolder.getAdapterPosition());
+        if (itemWrapper.getDepth() > 0) {
+            CodeBlock codeBlock = (CodeBlock) itemWrapper.getParent().getParent().getObject();
+            codeBlock.getStatements().remove(itemWrapper.getObject());
+        }
+        // 刷新列表
+        recyclerView.getAdapter().notifyItemRemoved(viewHolder.getAdapterPosition());
+    }
 
     public void moveStatement(int srcPostion, int targetPosition) {
         ItemWrapper<Statement> targetItem = itemWrappers.get(targetPosition);
@@ -279,11 +328,16 @@ public class PlaygroundFragment extends BaseFragment {
         animator.start();
     }
 
-    public void insertStatement(Statement statement) {
+    public void insertStatement(Function function) {
         //todo
-        ItemWrapper<Statement> itemWrapper = new ItemWrapper<>();
-        itemWrapper.setObject(statement);
-        itemWrappers.add(itemWrapper);
+        FunctionAdapter adapter = FunctionAdapter.get(function);
+        List<Statement> statements = adapter.generateStatement();
+        for (Statement statement : statements) {
+            statement.setFunctionAdapter(adapter);
+            ItemWrapper<Statement> itemWrapper = new ItemWrapper<>();
+            itemWrapper.setObject(statement);
+            itemWrappers.add(itemWrapper);
+        }
         recyclerView.getAdapter().notifyDataSetChanged();
     }
 

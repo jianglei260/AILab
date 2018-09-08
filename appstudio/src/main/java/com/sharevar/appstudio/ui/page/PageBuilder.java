@@ -1,7 +1,7 @@
 package com.sharevar.appstudio.ui.page;
 
 import com.sharevar.appstudio.data.Layout;
-import com.sharevar.appstudio.object.function.Function;
+import com.sharevar.appstudio.runtime.core.function.Function;
 
 public class PageBuilder {
     private Page page;

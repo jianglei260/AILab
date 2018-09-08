@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
-import com.sharevar.appstudio.object.function.Parameter;
+import com.sharevar.appstudio.runtime.core.function.Parameter;
 
 public abstract class ParameterAdapter {
     protected Parameter parameter;

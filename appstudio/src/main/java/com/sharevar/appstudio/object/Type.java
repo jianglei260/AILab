@@ -1,11 +1,10 @@
 package com.sharevar.appstudio.object;
 
 import com.sharevar.appstudio.data.BaseObject;
-import com.sharevar.appstudio.object.function.Function;
+import com.sharevar.appstudio.runtime.core.function.Function;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 public class Type extends BaseObject {
     private String name;

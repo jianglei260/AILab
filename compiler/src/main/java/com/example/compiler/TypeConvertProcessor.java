@@ -1,7 +1,7 @@
 package com.example.compiler;
 
 import com.google.auto.service.AutoService;
-import com.sharevar.appstudio.stand.type.Converter;
+import com.sharevar.appstudio.runtime.type.Converter;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;

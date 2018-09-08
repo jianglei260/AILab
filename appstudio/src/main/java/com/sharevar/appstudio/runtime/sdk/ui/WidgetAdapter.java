@@ -2,8 +2,8 @@ package com.sharevar.appstudio.runtime.sdk.ui;
 
 import com.sharevar.appstudio.data.Attr;
 import com.sharevar.appstudio.data.Widget;
-import com.sharevar.appstudio.object.function.Function;
-import com.sharevar.appstudio.object.function.Parameter;
+import com.sharevar.appstudio.runtime.core.function.Function;
+import com.sharevar.appstudio.runtime.core.function.Parameter;
 import com.sharevar.appstudio.runtime.sdk.FunctionAdapter;
 
 import java.util.ArrayList;

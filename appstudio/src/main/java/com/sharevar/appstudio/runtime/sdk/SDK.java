@@ -1,11 +1,11 @@
 package com.sharevar.appstudio.runtime.sdk;
 
 import com.sharevar.appstudio.common.serializable.XmlUtil;
-import com.sharevar.appstudio.object.function.Function;
-import com.sharevar.appstudio.object.function.Mode;
-import com.sharevar.appstudio.object.function.Option;
-import com.sharevar.appstudio.object.function.Parameter;
-import com.sharevar.appstudio.object.function.FunctionGroup;
+import com.sharevar.appstudio.runtime.core.function.Function;
+import com.sharevar.appstudio.runtime.core.function.Mode;
+import com.sharevar.appstudio.runtime.core.function.Option;
+import com.sharevar.appstudio.runtime.core.function.Parameter;
+import com.sharevar.appstudio.runtime.core.function.FunctionGroup;
 import com.sharevar.appstudio.runtime.core.RuntimeContext;
 
 import java.io.IOException;

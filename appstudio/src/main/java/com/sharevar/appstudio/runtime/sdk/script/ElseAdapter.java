@@ -1,6 +1,6 @@
 package com.sharevar.appstudio.runtime.sdk.script;
 
-import com.sharevar.appstudio.object.function.Function;
+import com.sharevar.appstudio.runtime.core.function.Function;
 import com.sharevar.appstudio.runtime.sdk.FunctionAdapter;
 
 public class ElseAdapter extends FunctionAdapter {

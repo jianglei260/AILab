@@ -2,7 +2,8 @@ package com.sharevar.appstudio.runtime.core;
 
 import android.content.Context;
 
-import com.sharevar.appstudio.object.function.CodeBlock;
+import com.sharevar.appstudio.runtime.core.function.CodeBlock;
+import com.sharevar.appstudio.runtime.core.function.Function;
 
 public class RuntimeContext {
     private Context context;
@@ -15,7 +16,11 @@ public class RuntimeContext {
         this.context = context;
     }
 
-    public CodeBlock getCodeBlock(){
+    public CodeBlock getIfCodeBlock(Function function){
+        //todo
+        return null;
+    }
+    public CodeBlock getElseCodeBlock(Function function){
         //todo
         return null;
     }

@@ -6,8 +6,8 @@ import com.sharevar.appstudio.R;
 
 import com.sharevar.appstudio.common.ds.CollectionOP;
 import com.sharevar.appstudio.common.string.StringUtil;
-import com.sharevar.appstudio.object.Statement;
-import com.sharevar.appstudio.object.function.FunctionGroup;
+import com.sharevar.appstudio.runtime.core.statement.Statement;
+import com.sharevar.appstudio.runtime.core.function.FunctionGroup;
 import com.sharevar.appstudio.runtime.sdk.SDK;
 
 import java.lang.reflect.Field;

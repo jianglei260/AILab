@@ -6,7 +6,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.sharevar.appstudio.R;
-import com.sharevar.appstudio.object.function.Parameter;
+import com.sharevar.appstudio.runtime.core.function.Parameter;
 
 public class DefaultParameterAdapter extends ParameterAdapter {
     TextView nameText;

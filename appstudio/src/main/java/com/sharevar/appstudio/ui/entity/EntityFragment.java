@@ -30,10 +30,15 @@ public class EntityFragment extends BaseListFragment {
     @Override
     public void bindData() {
         final RecyclerViewAdapter adapter = new RecyclerViewAdapter();
-        adapter.register(Entity.class, R.layout.list_item_entity, new RecyclerViewBinder<Entity>() {
+        adapter.register(Entity.class, new RecyclerViewBinder<Entity>() {
             @Override
             public void bind(Entity entity) {
                 textView(R.id.name).setText(entity.getSimpleName());
+            }
+
+            @Override
+            public int layoutRes() {
+                return R.layout.list_item_entity;
             }
         });
         recyclerView.setAdapter(adapter);

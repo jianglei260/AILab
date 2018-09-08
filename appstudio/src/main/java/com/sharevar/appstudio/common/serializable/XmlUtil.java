@@ -6,13 +6,11 @@ import com.sharevar.appstudio.common.ds.CollectionOP;
 import com.sharevar.appstudio.common.object.ObjectTool;
 import com.sharevar.appstudio.common.string.StringUtil;
 import com.sharevar.appstudio.object.Type;
-import com.sharevar.appstudio.stand.type.TypeInference;
+import com.sharevar.appstudio.runtime.type.TypeInference;
 
 import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.InputStreamReader;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;

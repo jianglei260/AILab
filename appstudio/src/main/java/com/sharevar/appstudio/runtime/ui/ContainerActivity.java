@@ -9,9 +9,9 @@ import com.sharevar.appstudio.R;
 import com.sharevar.appstudio.common.ds.CollectionOP;
 import com.sharevar.appstudio.data.Layout;
 import com.sharevar.appstudio.data.Project;
-import com.sharevar.appstudio.object.function.Function;
+import com.sharevar.appstudio.runtime.core.function.Function;
 import com.sharevar.appstudio.runtime.ProjectLoader;
-import com.sharevar.appstudio.stand.LayoutBuilder;
+import com.sharevar.appstudio.runtime.ui.stand.LayoutBuilder;
 import com.sharevar.appstudio.ui.page.Page;
 
 import java.util.List;

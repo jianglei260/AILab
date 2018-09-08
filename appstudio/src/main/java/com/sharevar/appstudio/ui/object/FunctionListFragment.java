@@ -1,9 +1,7 @@
 package com.sharevar.appstudio.ui.object;
 
-import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.recyclerview.extensions.ListAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,11 +12,9 @@ import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.sharevar.appstudio.R;
-import com.sharevar.appstudio.object.Statement;
-import com.sharevar.appstudio.object.function.Function;
-import com.sharevar.appstudio.object.function.FunctionGroup;
+import com.sharevar.appstudio.runtime.core.function.Function;
+import com.sharevar.appstudio.runtime.core.function.FunctionGroup;
 import com.sharevar.appstudio.runtime.core.VM;
-import com.sharevar.appstudio.runtime.sdk.SDK;
 import com.sharevar.appstudio.ui.base.BaseFragment;
 import com.sharevar.appstudio.ui.common.RecyclerViewAdapter;
 import com.sharevar.appstudio.ui.common.RecyclerViewBinder;
@@ -98,9 +94,7 @@ public class FunctionListFragment extends BaseFragment {
     }
 
     public void insertStatement(Function function){
-        Statement statement=new Statement();
-        statement.setFunction(function);
-        ((PlaygroundActivity)getActivity()).getFragment().insertStatement(statement);
+        ((PlaygroundActivity)getActivity()).getFragment().insertStatement(function);
     }
 
     public View getPageView(FunctionGroup functionGroup) {

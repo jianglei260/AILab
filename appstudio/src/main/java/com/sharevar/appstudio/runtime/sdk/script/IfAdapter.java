@@ -1,14 +1,17 @@
 package com.sharevar.appstudio.runtime.sdk.script;
 
-import com.sharevar.appstudio.object.function.CodeBlock;
-import com.sharevar.appstudio.object.function.Function;
-import com.sharevar.appstudio.object.function.Mode;
-import com.sharevar.appstudio.object.function.Parameter;
-import com.sharevar.appstudio.object.function.Void;
+import com.sharevar.appstudio.runtime.core.statement.EndStatement;
+import com.sharevar.appstudio.runtime.core.statement.Statement;
+import com.sharevar.appstudio.runtime.core.function.CodeBlock;
+import com.sharevar.appstudio.runtime.core.function.Function;
+import com.sharevar.appstudio.runtime.core.function.Mode;
+import com.sharevar.appstudio.runtime.core.function.Parameter;
+import com.sharevar.appstudio.runtime.core.function.Void;
 import com.sharevar.appstudio.runtime.sdk.FunctionAdapter;
+import com.sharevar.appstudio.ui.object.PlaygroundFragment;
 
 import java.util.Collection;
-import java.util.Comparator;
+import java.util.List;
 
 public class IfAdapter extends FunctionAdapter {
     public IfAdapter(Function function) {
@@ -17,7 +20,7 @@ public class IfAdapter extends FunctionAdapter {
 
     @Override
     public Object invoke() {
-        CodeBlock codeBlock = function.getRuntimeContext().getCodeBlock();
+
         Mode mode = function.getModes().get(function.getModeIndex());
         boolean result = false;
         switch (mode.getName()) {
@@ -38,10 +41,22 @@ public class IfAdapter extends FunctionAdapter {
                 break;
         }
         if (result) {
-            return codeBlock.invoke();
+            return getContext().getIfCodeBlock(function).invoke();
         } else {
-            return null;
+            return getContext().getElseCodeBlock(function).invoke();
         }
+    }
+
+    @Override
+    public List<Statement> generateStatement() {
+        List<Statement> statements=super.generateStatement();
+        Statement elseStatement=new Statement();
+        elseStatement.setBinderClass(PlaygroundFragment.ElseRecyclerViewBinder.class.getName());
+        EndStatement statement=new EndStatement();
+        statement.setBinderClass(PlaygroundFragment.EndRecyclerViewBinder.class.getName());
+        statements.add(elseStatement);
+        statements.add(statement);
+        return statements;
     }
 
     public boolean greatThan(Parameter parameter1, Parameter parameter2) {

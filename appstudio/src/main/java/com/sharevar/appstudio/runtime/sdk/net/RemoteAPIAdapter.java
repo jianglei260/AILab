@@ -1,9 +1,10 @@
 package com.sharevar.appstudio.runtime.sdk.net;
 
 import com.sharevar.appstudio.common.serializable.JsonUtil;
-import com.sharevar.appstudio.object.function.Function;
-import com.sharevar.appstudio.object.function.Mode;
-import com.sharevar.appstudio.object.function.Parameter;
+import com.sharevar.appstudio.runtime.core.statement.Statement;
+import com.sharevar.appstudio.runtime.core.function.Function;
+import com.sharevar.appstudio.runtime.core.function.Mode;
+import com.sharevar.appstudio.runtime.core.function.Parameter;
 import com.sharevar.appstudio.runtime.sdk.FunctionAdapter;
 
 import java.io.IOException;
@@ -31,6 +32,11 @@ public class RemoteAPIAdapter extends FunctionAdapter
                 return doPost(mode.getParameters());
             }
         }
+        return null;
+    }
+
+    @Override
+    public List<Statement> generateStatement() {
         return null;
     }
 

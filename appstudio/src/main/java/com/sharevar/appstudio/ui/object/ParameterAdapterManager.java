@@ -2,7 +2,7 @@ package com.sharevar.appstudio.ui.object;
 
 import android.content.Context;
 
-import com.sharevar.appstudio.object.function.Parameter;
+import com.sharevar.appstudio.runtime.core.function.Parameter;
 
 import java.util.HashMap;
 import java.util.Map;
