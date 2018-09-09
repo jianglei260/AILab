@@ -309,7 +309,7 @@ public class PlaygroundFragment extends BaseFragment {
         int depth = srcItem.getDepth();
         srcItem.setDepth(targetItem.getDepth());
         srcItem.setParent(targetItem.getParent());
-        itemWrappers.add(targetPosition, srcItem);
+//        itemWrappers.add(targetPosition, srcItem);
 
     }
 
