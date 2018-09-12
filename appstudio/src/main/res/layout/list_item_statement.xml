@@ -7,51 +7,59 @@
     android:layout_marginTop="4dp"
     android:layout_marginRight="8dp"
     android:layout_marginBottom="4dp"
-    app:cardCornerRadius="4dp"
-    >
+    app:cardCornerRadius="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/play_frgment_card_background" >
+        android:background="@color/play_frgment_card_background">
 
         <!--<TextView-->
-            <!--android:id="@+id/index"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_margin="4dp" />-->
+        <!--android:id="@+id/index"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_margin="4dp" />-->
 
         <!--<TextView-->
-            <!--android:id="@+id/fun_return"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="32dp"-->
-            <!--android:layout_toRightOf="@id/index" />-->
+        <!--android:id="@+id/fun_return"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="32dp"-->
+        <!--android:layout_toRightOf="@id/index" />-->
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/fun_image"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            app:placeholderImage="@drawable/ic_icon"
             android:layout_margin="4dp"
-            app:placeholderImageScaleType="fitCenter"/>
+            app:placeholderImage="@drawable/ic_icon"
+            app:placeholderImageScaleType="fitCenter" />
 
         <TextView
             android:id="@+id/fun_name"
             android:layout_width="match_parent"
             android:layout_height="32dp"
-            android:layout_toRightOf="@+id/fun_image"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="12dp"
-            android:gravity="center_vertical"/>
+            android:layout_toRightOf="@+id/fun_image"
+            android:gravity="center_vertical" />
 
         <ImageView
+            android:id="@+id/close_image"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_alignParentRight="true"
             android:layout_margin="8dp"
-            android:src="@drawable/ic_close"
-            android:padding="4dp"/>
+            android:padding="4dp"
+            android:src="@drawable/ic_close" />
+
+        <Switch
+            android:id="@+id/expand_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_margin="8dp"
+            android:layout_toLeftOf="@id/close_image"
+            android:text="折叠" />
 
         <RelativeLayout
             android:id="@+id/radio_layout"
@@ -77,8 +85,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/radio_layout"
-            android:orientation="vertical"
             android:layout_margin="8dp"
-            android:background="@drawable/shape_radius_4dp_white"></LinearLayout>
+            android:background="@drawable/shape_radius_4dp_white"
+            android:orientation="vertical"></LinearLayout>
     </RelativeLayout>
 </android.support.v7.widget.CardView>
