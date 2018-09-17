@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/AILab.iml" filepath="$PROJECT_DIR$/AILab.iml" />
       <module fileurl="file://$PROJECT_DIR$/appstudio/appstudio.iml" filepath="$PROJECT_DIR$/appstudio/appstudio.iml" />
       <module fileurl="file://$PROJECT_DIR$/compiler/compiler.iml" filepath="$PROJECT_DIR$/compiler/compiler.iml" />
-      <module fileurl="file://$PROJECT_DIR$/compiler/compiler.iml" filepath="$PROJECT_DIR$/compiler/compiler.iml" />
       <module fileurl="file://$PROJECT_DIR$/study/study.iml" filepath="$PROJECT_DIR$/study/study.iml" />
     </modules>
   </component>

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -30,6 +31,9 @@ public abstract class RecyclerViewBinder<T> {
 
     public LinearLayout linearLayout(@IdRes int id) {
         return (LinearLayout) viewHolder.view(id);
+    }
+    public RelativeLayout relativeLayout(@IdRes int id) {
+        return (RelativeLayout) viewHolder.view(id);
     }
 
     public ImageView imageView(@IdRes int id) {

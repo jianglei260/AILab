@@ -5,6 +5,7 @@ public class ItemWrapper<T> {
     private int index;
     private int depth;
     private ItemWrapper<T> parent;
+    private boolean closed;
 
     public T getObject() {
         return object;
@@ -36,5 +37,13 @@ public class ItemWrapper<T> {
 
     public void setParent(ItemWrapper<T> parent) {
         this.parent = parent;
+    }
+
+    public boolean isClosed() {
+        return closed;
+    }
+
+    public void setClosed(boolean closed) {
+        this.closed = closed;
     }
 }

@@ -11,6 +11,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 
 import com.google.gson.reflect.TypeToken;
 import com.qmuiteam.qmui.widget.QMUITopBar;
@@ -44,7 +45,7 @@ public class PlaygroundFragment extends BaseFragment {
         recyclerView = root.findViewById(R.id.recycler_view);
         mTopBar = root.findViewById(R.id.topbar);
         initRule();
-        initBinders(DefaultRecyclerViewBinder.class,IfRecyclerViewBinder.class, ElseRecyclerViewBinder.class, EndRecyclerViewBinder.class);
+        initBinders(DefaultRecyclerViewBinder.class, IfRecyclerViewBinder.class, ElseRecyclerViewBinder.class, EndRecyclerViewBinder.class);
         initTopBar();
         initRecyclerView();
         initRecyclerViewDrag();
@@ -82,43 +83,35 @@ public class PlaygroundFragment extends BaseFragment {
         }
     }
 
-    public class DefaultRecyclerViewBinder extends RecyclerViewBinder<ItemWrapper<Statement>> {
+    public class DefaultRecyclerViewBinder extends BaseRecyclerViewBinder {
+        public DefaultRecyclerViewBinder(RecyclerView recyclerView) {
+            super(recyclerView);
+        }
+
         @Override
         public void bind(ItemWrapper<Statement> itemWrapper) {
-            //                textView(R.id.index).setText(String.valueOf(itemWrappers.indexOf(itemWrapper)));
-            ViewGroup.MarginLayoutParams marginLayoutParams = ((ViewGroup.MarginLayoutParams) viewHolder.itemView.getLayoutParams());
-            marginLayoutParams.leftMargin = marginLayoutParams.leftMargin + getResources().getDimensionPixelOffset(R.dimen.child_left_margin) * itemWrapper.getDepth();
-            Function function = itemWrapper.getObject().getFunction();
-            Variable variable = itemWrapper.getObject().getRetVaule();
-            textView(R.id.fun_name).setText(function.getName());
             final LinearLayout parameterLayout = linearLayout(R.id.fun_params);
-            RadioGroup radioGroup = (RadioGroup) view(R.id.radio_group);
-            radioGroup.removeAllViews();
+            RelativeLayout modeLayout = relativeLayout(R.id.mode_container);
             if (variable != null) {
                 textView(R.id.fun_return).setText(variable.getName());
             }
             final List<Mode> modes = function.getModes();
             if (modes.size() > 1) {
-                initRadioGroup(radioGroup, modes);
-                radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        initParams(parameterLayout, modes.get(checkedId).getParameters());
-                    }
-                });
+                initMode(modeLayout, modes);
             } else {
                 initParams(parameterLayout, modes.get(0).getParameters());
             }
-            radioGroup.check(0);
         }
 
         @Override
         public int layoutRes() {
             return R.layout.list_item_statement;
         }
+
+
     }
 
-    public  class IfRecyclerViewBinder extends RecyclerViewBinder<ItemWrapper<Statement>> {
+    public class IfRecyclerViewBinder extends RecyclerViewBinder<ItemWrapper<Statement>> {
 
         @Override
         public void bind(ItemWrapper<Statement> itemWrapper) {
@@ -131,7 +124,7 @@ public class PlaygroundFragment extends BaseFragment {
         }
     }
 
-    public  class ElseRecyclerViewBinder extends RecyclerViewBinder<ItemWrapper<Statement>> {
+    public class ElseRecyclerViewBinder extends RecyclerViewBinder<ItemWrapper<Statement>> {
 
         @Override
         public void bind(ItemWrapper<Statement> itemWrapper) {
@@ -144,7 +137,7 @@ public class PlaygroundFragment extends BaseFragment {
         }
     }
 
-    public  class EndRecyclerViewBinder extends RecyclerViewBinder<ItemWrapper<Statement>> {
+    public class EndRecyclerViewBinder extends RecyclerViewBinder<ItemWrapper<Statement>> {
 
         @Override
         public void bind(ItemWrapper<Statement> itemWrapper) {
@@ -188,7 +181,14 @@ public class PlaygroundFragment extends BaseFragment {
         }
     }
 
-    public void initRadioGroup(RadioGroup radioGroup, List<Mode> modes) {
+    public void initMode(RelativeLayout layout,final LinearLayout parameterLayout,final List<Mode> modes) {
+        layout.removeAllViews();
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                initParams(parameterLayout, modes.get(checkedId).getParameters());
+            }
+        });
         for (int i = 0; i < modes.size(); i++) {
             RadioButton radioButton = new RadioButton(getActivity());
             radioButton.setButtonDrawable(null);
@@ -334,9 +334,7 @@ public class PlaygroundFragment extends BaseFragment {
         List<Statement> statements = adapter.generateStatement();
         for (Statement statement : statements) {
             statement.setFunctionAdapter(adapter);
-            ItemWrapper<Statement> itemWrapper = new ItemWrapper<>();
-            itemWrapper.setObject(statement);
-            itemWrappers.add(itemWrapper);
+
         }
         recyclerView.getAdapter().notifyDataSetChanged();
     }
