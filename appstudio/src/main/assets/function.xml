@@ -77,11 +77,24 @@
     </FunctionGroup>
     <FunctionGroup name="script">
         <Function name="if" adapter="com.sharevar.appstudio.runtime.sdk.script.IfAdapter">
-            <Mode name="graetThan" paramsNum="2" />
-            <Mode name="equal" paramsNum="2" />
-            <Mode name="smallThan" paramsNum="2" />
-            <Mode name="notNull" paramsNum="1" />
-            <Mode name="notEmpty" paramsNum="1" />
+            <Mode name="graetThan" paramsNum="2" >
+                <Parameter name="num1" type="java.lang.Integer" />
+                <Parameter name="num2" type="java.lang.Integer" />
+            </Mode>
+            <Mode name="equal" paramsNum="2" >
+                <Parameter name="num1" type="java.lang.Integer" />
+                <Parameter name="num2" type="java.lang.Integer" />
+            </Mode>
+            <Mode name="smallThan" paramsNum="2" >
+                <Parameter name="num1" type="java.lang.Integer" />
+                <Parameter name="num2" type="java.lang.Integer" />
+            </Mode>
+            <Mode name="notNull" paramsNum="1" >
+                <Parameter name="object" type="java.lang.Object" />
+            </Mode>
+            <Mode name="notEmpty" paramsNum="1" >
+                <Parameter name="string" type="java.lang.String" />
+            </Mode>
         </Function>
     </FunctionGroup>
 </data>

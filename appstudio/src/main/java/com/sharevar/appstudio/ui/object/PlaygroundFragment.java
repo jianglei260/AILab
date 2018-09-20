@@ -85,13 +85,14 @@ public class PlaygroundFragment extends BaseFragment {
         }
     }
 
-    public class DefaultRecyclerViewBinder extends BaseRecyclerViewBinder {
+    public static class DefaultRecyclerViewBinder extends BaseRecyclerViewBinder {
         public DefaultRecyclerViewBinder(RecyclerView recyclerView) {
             super(recyclerView);
         }
 
         @Override
         public void bind(ItemWrapper<Statement> itemWrapper) {
+            super.bind(itemWrapper);
             final LinearLayout parameterLayout = linearLayout(R.id.fun_params);
             RelativeLayout modeLayout = relativeLayout(R.id.mode_container);
             if (variable != null) {
@@ -99,8 +100,10 @@ public class PlaygroundFragment extends BaseFragment {
             }
             final List<Mode> modes = function.getModes();
             if (modes.size() > 1) {
+                modeLayout.setVisibility(View.VISIBLE);
                 initMode(modeLayout, parameterLayout, modes);
             } else {
+                modeLayout.setVisibility(View.GONE);
                 initParams(parameterLayout, modes.get(0).getParameters());
             }
         }
@@ -113,7 +116,7 @@ public class PlaygroundFragment extends BaseFragment {
 
     }
 
-    public class IfRecyclerViewBinder extends BaseRecyclerViewBinder {
+    public static class IfRecyclerViewBinder extends BaseRecyclerViewBinder {
 
         public IfRecyclerViewBinder(RecyclerView recyclerView) {
             super(recyclerView);
@@ -130,7 +133,7 @@ public class PlaygroundFragment extends BaseFragment {
         }
     }
 
-    public class ElseRecyclerViewBinder extends BaseRecyclerViewBinder {
+    public static class ElseRecyclerViewBinder extends BaseRecyclerViewBinder {
 
         public ElseRecyclerViewBinder(RecyclerView recyclerView) {
             super(recyclerView);
@@ -147,7 +150,7 @@ public class PlaygroundFragment extends BaseFragment {
         }
     }
 
-    public class EndRecyclerViewBinder extends BaseRecyclerViewBinder {
+    public static class EndRecyclerViewBinder extends BaseRecyclerViewBinder {
 
         public EndRecyclerViewBinder(RecyclerView recyclerView) {
             super(recyclerView);
