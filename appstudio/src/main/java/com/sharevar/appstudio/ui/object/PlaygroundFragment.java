@@ -12,9 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.qmuiteam.qmui.widget.QMUITopBar;
+import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 import com.sharevar.appstudio.R;
 import com.sharevar.appstudio.runtime.core.statement.Statement;
 import com.sharevar.appstudio.runtime.core.var.Variable;
@@ -72,11 +74,11 @@ public class PlaygroundFragment extends BaseFragment {
     }
 
 
-    public void initBinders(Class<? extends RecyclerViewBinder>... binderClasses) {
-        recyclerViewBinders = new RecyclerViewBinder[binderClasses.length];
+    public void initBinders(Class<? extends BaseRecyclerViewBinder>... binderClasses) {
+        recyclerViewBinders = new BaseRecyclerViewBinder[binderClasses.length];
         for (int i = 0; i < binderClasses.length; i++) {
             try {
-                recyclerViewBinders[i] = binderClasses[i].getConstructor(PlaygroundFragment.class).newInstance(this);
+                recyclerViewBinders[i] = binderClasses[i].getConstructor(RecyclerView.class).newInstance(recyclerView);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -97,7 +99,7 @@ public class PlaygroundFragment extends BaseFragment {
             }
             final List<Mode> modes = function.getModes();
             if (modes.size() > 1) {
-                initMode(modeLayout, modes);
+                initMode(modeLayout, parameterLayout, modes);
             } else {
                 initParams(parameterLayout, modes.get(0).getParameters());
             }
@@ -111,7 +113,11 @@ public class PlaygroundFragment extends BaseFragment {
 
     }
 
-    public class IfRecyclerViewBinder extends RecyclerViewBinder<ItemWrapper<Statement>> {
+    public class IfRecyclerViewBinder extends BaseRecyclerViewBinder {
+
+        public IfRecyclerViewBinder(RecyclerView recyclerView) {
+            super(recyclerView);
+        }
 
         @Override
         public void bind(ItemWrapper<Statement> itemWrapper) {
@@ -124,7 +130,11 @@ public class PlaygroundFragment extends BaseFragment {
         }
     }
 
-    public class ElseRecyclerViewBinder extends RecyclerViewBinder<ItemWrapper<Statement>> {
+    public class ElseRecyclerViewBinder extends BaseRecyclerViewBinder {
+
+        public ElseRecyclerViewBinder(RecyclerView recyclerView) {
+            super(recyclerView);
+        }
 
         @Override
         public void bind(ItemWrapper<Statement> itemWrapper) {
@@ -137,7 +147,11 @@ public class PlaygroundFragment extends BaseFragment {
         }
     }
 
-    public class EndRecyclerViewBinder extends RecyclerViewBinder<ItemWrapper<Statement>> {
+    public class EndRecyclerViewBinder extends BaseRecyclerViewBinder {
+
+        public EndRecyclerViewBinder(RecyclerView recyclerView) {
+            super(recyclerView);
+        }
 
         @Override
         public void bind(ItemWrapper<Statement> itemWrapper) {
@@ -181,25 +195,21 @@ public class PlaygroundFragment extends BaseFragment {
         }
     }
 
-    public void initMode(RelativeLayout layout,final LinearLayout parameterLayout,final List<Mode> modes) {
+    public void initMode(RelativeLayout layout, final LinearLayout parameterLayout, final List<Mode> modes) {
         layout.removeAllViews();
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        QMUIBottomSheet.BottomListSheetBuilder builder = new QMUIBottomSheet.BottomListSheetBuilder(getActivity());
+        for (Mode mode : modes) {
+            builder.addItem(mode.getName());
+        }
+        builder.setOnSheetItemClickListener(new QMUIBottomSheet.BottomListSheetBuilder.OnSheetItemClickListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                initParams(parameterLayout, modes.get(checkedId).getParameters());
+            public void onClick(QMUIBottomSheet dialog, View itemView, int position, String tag) {
+                dialog.dismiss();
+                initParams(parameterLayout,modes.get(position).getParameters());
             }
         });
-        for (int i = 0; i < modes.size(); i++) {
-            RadioButton radioButton = new RadioButton(getActivity());
-            radioButton.setButtonDrawable(null);
-            radioButton.setBackground(getResources().getDrawable(R.drawable.s_radio_button_bg));
-            int padding = 12;
-            radioButton.setPadding(padding, padding, padding, padding);
-            radioButton.setId(i);
-            radioButton.setText(modes.get(i).getName());
-            radioGroup.addView(radioButton);
-        }
     }
+
 
     private void initTopBar() {
         mTopBar.setTitle("工作流");
@@ -336,6 +346,7 @@ public class PlaygroundFragment extends BaseFragment {
             statement.setFunctionAdapter(adapter);
 
         }
+        itemWrappers.addAll(toItemWrapper(statements));
         recyclerView.getAdapter().notifyDataSetChanged();
     }
 
