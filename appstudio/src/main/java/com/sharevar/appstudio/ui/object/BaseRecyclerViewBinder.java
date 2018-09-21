@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
@@ -16,6 +17,7 @@ import com.sharevar.appstudio.runtime.core.function.Mode;
 import com.sharevar.appstudio.runtime.core.function.Parameter;
 import com.sharevar.appstudio.runtime.core.statement.Statement;
 import com.sharevar.appstudio.runtime.core.var.Variable;
+import com.sharevar.appstudio.ui.common.RecyclerViewAdapter;
 import com.sharevar.appstudio.ui.common.RecyclerViewBinder;
 
 import java.util.List;
@@ -31,7 +33,7 @@ public abstract class BaseRecyclerViewBinder extends RecyclerViewBinder<ItemWrap
     }
 
     @Override
-    public void bind(ItemWrapper<Statement> itemWrapper) {
+    public void bind(final RecyclerViewAdapter.ItemViewHolder viewHolder, ItemWrapper<Statement> itemWrapper) {
         //                textView(R.id.index).setText(String.valueOf(itemWrappers.indexOf(itemWrapper)));
         ViewGroup.MarginLayoutParams marginLayoutParams = ((ViewGroup.MarginLayoutParams) viewHolder.itemView.getLayoutParams());
         marginLayoutParams.leftMargin = marginLayoutParams.leftMargin + recyclerView.getResources().getDimensionPixelOffset(R.dimen.child_left_margin) * itemWrapper.getDepth();
@@ -39,6 +41,17 @@ public abstract class BaseRecyclerViewBinder extends RecyclerViewBinder<ItemWrap
         variable = itemWrapper.getObject().getRetVaule();
         textView(R.id.fun_name).setText(function.getName());
         expandSwitch = (Switch) view(R.id.expand_switch);
+        expandSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                setViewHolder(viewHolder);
+                if (isChecked){
+                    relativeLayout(R.id.params_layout).setVisibility(View.GONE);
+                }else {
+                    relativeLayout(R.id.params_layout).setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     public void initMode(RelativeLayout layout, final LinearLayout parameterLayout, final List<Mode> modes) {

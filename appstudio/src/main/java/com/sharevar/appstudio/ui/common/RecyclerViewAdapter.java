@@ -66,7 +66,7 @@ public class RecyclerViewAdapter extends MultiTypeAdapter {
             @Override
             protected void onBindViewHolder(@NonNull ItemViewHolder holder, @NonNull T item) {
                 binder.setViewHolder(holder);
-                binder.bind(item);
+                binder.bind(holder,item);
             }
         });
     }
@@ -110,7 +110,7 @@ public class RecyclerViewAdapter extends MultiTypeAdapter {
         @Override
         protected void onBindViewHolder(@NonNull ItemViewHolder holder, @NonNull Object item) {
             binder.setViewHolder(holder);
-            binder.bind(item);
+            binder.bind(holder,item);
         }
     }
 

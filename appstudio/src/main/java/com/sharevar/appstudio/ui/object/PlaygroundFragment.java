@@ -91,8 +91,8 @@ public class PlaygroundFragment extends BaseFragment {
         }
 
         @Override
-        public void bind(ItemWrapper<Statement> itemWrapper) {
-            super.bind(itemWrapper);
+        public void bind(RecyclerViewAdapter.ItemViewHolder viewHolder, ItemWrapper<Statement> itemWrapper) {
+            super.bind(viewHolder, itemWrapper);
             final LinearLayout parameterLayout = linearLayout(R.id.fun_params);
             RelativeLayout modeLayout = relativeLayout(R.id.mode_container);
             if (variable != null) {
@@ -122,10 +122,6 @@ public class PlaygroundFragment extends BaseFragment {
             super(recyclerView);
         }
 
-        @Override
-        public void bind(ItemWrapper<Statement> itemWrapper) {
-
-        }
 
         @Override
         public int layoutRes() {
@@ -140,8 +136,8 @@ public class PlaygroundFragment extends BaseFragment {
         }
 
         @Override
-        public void bind(ItemWrapper<Statement> itemWrapper) {
-
+        public void bind(RecyclerViewAdapter.ItemViewHolder viewHolder, ItemWrapper<Statement> itemWrapper) {
+//            super.bind(viewHolder, itemWrapper);
         }
 
         @Override
@@ -157,8 +153,8 @@ public class PlaygroundFragment extends BaseFragment {
         }
 
         @Override
-        public void bind(ItemWrapper<Statement> itemWrapper) {
-
+        public void bind(RecyclerViewAdapter.ItemViewHolder viewHolder, ItemWrapper<Statement> itemWrapper) {
+//            super.bind(viewHolder, itemWrapper);
         }
 
         @Override
@@ -176,42 +172,8 @@ public class PlaygroundFragment extends BaseFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
     }
 
-    public void initParams(LinearLayout container, List<Parameter> parameters) {
-        int num = 0;
-        container.removeAllViews();
-        for (Parameter parameter : parameters) {
-            if (parameter.getType() != null) {
-                ParameterAdapter parameterAdapter = ParameterAdapterManager.getInstance(getActivity()).get(parameter);
-                if (parameterAdapter == null) {
-                    parameterAdapter = ParameterAdapterManager.getInstance(getActivity()).getDefault(parameter);
-                }
-                View view = parameterAdapter.getView();
-                container.addView(view);
-                if (num < parameters.size()) {
-                    View line = new View(getActivity());
-                    line.setBackgroundColor(getActivity().getResources().getColor(R.color.play_frgment_card_background));
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelSize(R.dimen.list_divider_height));
-                    params.leftMargin = getResources().getDimensionPixelSize(R.dimen.child_left_margin);
-                    container.addView(line, params);
-                }
-            }
-        }
-    }
 
-    public void initMode(RelativeLayout layout, final LinearLayout parameterLayout, final List<Mode> modes) {
-        layout.removeAllViews();
-        QMUIBottomSheet.BottomListSheetBuilder builder = new QMUIBottomSheet.BottomListSheetBuilder(getActivity());
-        for (Mode mode : modes) {
-            builder.addItem(mode.getName());
-        }
-        builder.setOnSheetItemClickListener(new QMUIBottomSheet.BottomListSheetBuilder.OnSheetItemClickListener() {
-            @Override
-            public void onClick(QMUIBottomSheet dialog, View itemView, int position, String tag) {
-                dialog.dismiss();
-                initParams(parameterLayout,modes.get(position).getParameters());
-            }
-        });
-    }
+
 
 
     private void initTopBar() {

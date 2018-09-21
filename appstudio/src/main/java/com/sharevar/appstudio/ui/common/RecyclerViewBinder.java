@@ -44,7 +44,7 @@ public abstract class RecyclerViewBinder<T> {
         return (Button) viewHolder.view(id);
     }
 
-    public abstract void bind(T t);
+    public abstract void bind(RecyclerViewAdapter.ItemViewHolder viewHolder, T t);
 
     public abstract @LayoutRes int layoutRes();
 }

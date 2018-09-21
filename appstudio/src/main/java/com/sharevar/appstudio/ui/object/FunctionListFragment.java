@@ -108,8 +108,9 @@ public class FunctionListFragment extends BaseFragment {
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
             RecyclerViewAdapter adapter=new RecyclerViewAdapter();
             adapter.register(Function.class,new RecyclerViewBinder<Function>() {
+
                 @Override
-                public void bind(final Function function) {
+                public void bind(RecyclerViewAdapter.ItemViewHolder viewHolder, final Function function) {
                     textView(R.id.fun_name).setText(function.getName());
                     textView(R.id.fun_desc).setText(function.getDesc());
                     viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
