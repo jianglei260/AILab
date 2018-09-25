@@ -4,6 +4,10 @@ import android.content.Context;
 
 import com.sharevar.appstudio.runtime.core.function.CodeBlock;
 import com.sharevar.appstudio.runtime.core.function.Function;
+import com.sharevar.appstudio.runtime.core.function.Parameter;
+import com.sharevar.appstudio.runtime.core.var.Variable;
+
+import java.util.List;
 
 public class RuntimeContext {
     private Context context;
@@ -22,6 +26,10 @@ public class RuntimeContext {
     }
     public CodeBlock getElseCodeBlock(Function function){
         //todo
+        return null;
+    }
+
+    public List<Variable> getAvailbleVars(Parameter parameter){
         return null;
     }
 }

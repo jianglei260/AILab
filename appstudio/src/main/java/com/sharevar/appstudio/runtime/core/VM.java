@@ -29,6 +29,8 @@ public class VM {
     }
 
 
+
+
     public void init() {
         runtimeContext = new RuntimeContext();
         runtimeContext.setContext(context);

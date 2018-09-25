@@ -11,17 +11,27 @@ import com.sharevar.appstudio.runtime.core.function.Parameter;
 public class DefaultParameterAdapter extends ParameterAdapter {
     TextView nameText;
     EditText valueEditText;
+
     public DefaultParameterAdapter(Parameter parameter) {
         super(parameter);
     }
 
     @Override
     public View getView() {
-        View root= LayoutInflater.from(context).inflate(R.layout.layout_parameter_default,null,true);
-        nameText=root.findViewById(R.id.param_name);
-        valueEditText=root.findViewById(R.id.param_value);
+        View root = LayoutInflater.from(context).inflate(R.layout.layout_parameter_default, null, true);
+        nameText = root.findViewById(R.id.param_name);
+        valueEditText = root.findViewById(R.id.param_value);
         nameText.setText(parameter.getName());
         valueEditText.setHint(parameter.getType().getName());
+        valueEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               ParameterDialogBuilder builder=new ParameterDialogBuilder(context)
+                       .parameter(parameter)
+                       .runtimeContext(runtimeContext);
+               builder.create().show();
+            }
+        });
         return root;
     }
 
