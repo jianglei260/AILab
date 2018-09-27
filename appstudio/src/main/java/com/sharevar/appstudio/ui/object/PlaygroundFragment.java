@@ -18,6 +18,7 @@ import com.google.gson.reflect.TypeToken;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 import com.sharevar.appstudio.R;
+import com.sharevar.appstudio.runtime.core.VM;
 import com.sharevar.appstudio.runtime.core.statement.Statement;
 import com.sharevar.appstudio.runtime.core.var.Variable;
 import com.sharevar.appstudio.runtime.core.function.CodeBlock;
@@ -39,13 +40,15 @@ public class PlaygroundFragment extends BaseFragment {
     QMUITopBar mTopBar;
     List<ItemWrapper<Statement>> itemWrappers = new ArrayList<>();
     ClassLinkRule rule;
-    RecyclerViewBinder[] recyclerViewBinders;
+    BaseRecyclerViewBinder[] recyclerViewBinders;
+    String id;
 
     @Override
     protected View onCreateView() {
         View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_palyground, null);
         recyclerView = root.findViewById(R.id.recycler_view);
         mTopBar = root.findViewById(R.id.topbar);
+        id=VM.load(getContext()).init();
         initRule();
         initBinders(DefaultRecyclerViewBinder.class, IfRecyclerViewBinder.class, ElseRecyclerViewBinder.class, EndRecyclerViewBinder.class);
         initTopBar();
@@ -79,6 +82,7 @@ public class PlaygroundFragment extends BaseFragment {
         for (int i = 0; i < binderClasses.length; i++) {
             try {
                 recyclerViewBinders[i] = binderClasses[i].getConstructor(RecyclerView.class).newInstance(recyclerView);
+                recyclerViewBinders[i].setId(id);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -101,10 +105,10 @@ public class PlaygroundFragment extends BaseFragment {
             final List<Mode> modes = function.getModes();
             if (modes.size() > 1) {
                 modeLayout.setVisibility(View.VISIBLE);
-                initMode(modeLayout, parameterLayout, modes);
+                initMode(id,modeLayout, parameterLayout, modes);
             } else {
                 modeLayout.setVisibility(View.GONE);
-                initParams(parameterLayout, modes.get(0).getParameters());
+                initParams(id,parameterLayout, modes.get(0).getParameters());
             }
         }
 
@@ -165,15 +169,12 @@ public class PlaygroundFragment extends BaseFragment {
 
     private void initRecyclerView() {
         final RecyclerViewAdapter adapter = new RecyclerViewAdapter();
-        adapter.register(new TypeToken<ItemWrapper<Statement>>() {
+        adapter.register((Class<? extends ItemWrapper<Statement>>) new TypeToken<ItemWrapper<Statement>>() {
         }.getRawType(), rule, recyclerViewBinders);
         recyclerView.setAdapter(adapter);
         adapter.setItems(itemWrappers);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
     }
-
-
-
 
 
     private void initTopBar() {

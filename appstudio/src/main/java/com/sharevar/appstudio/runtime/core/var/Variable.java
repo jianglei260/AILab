@@ -2,11 +2,13 @@ package com.sharevar.appstudio.runtime.core.var;
 
 import com.sharevar.appstudio.data.BaseObject;
 import com.sharevar.appstudio.object.Type;
+import com.sharevar.appstudio.runtime.core.RuntimeContext;
 
 public class Variable extends BaseObject {
     private Type type;
     private String name;
     private Object value;
+
 
     public Type getType() {
         return type;

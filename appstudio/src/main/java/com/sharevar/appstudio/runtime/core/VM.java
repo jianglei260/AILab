@@ -15,26 +15,35 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class VM {
     private List<Statement> statements;
     private Map<String, String> nameMap;
     private Context context;
     private SDK sdk;
-    private RuntimeContext runtimeContext;
+    private static Map<String, RuntimeContext> contextMap = new HashMap<>();
+    private static VM instance;
 
     public static VM load(Context context) {
-        VM vm = new VM(context);
-        return vm;
+        if (instance == null)
+            instance = new VM(context);
+        return instance;
     }
 
 
-
-
-    public void init() {
-        runtimeContext = new RuntimeContext();
+    public String init() {
+        String id = UUID.randomUUID().toString();
+        RuntimeContext runtimeContext = new RuntimeContext();
         runtimeContext.setContext(context);
         sdk = SDK.getInstance(runtimeContext);
+        contextMap.put(id, runtimeContext);
+        return id;
+    }
+
+
+    public static RuntimeContext getRuntimeContext(String id){
+        return contextMap.get(id);
     }
 
     public List<FunctionGroup> getFunctionGroups() {
@@ -48,7 +57,6 @@ public class VM {
     VM(Context context) {
         this.context = context;
         nameMap = new HashMap<>();
-        init();
     }
 
     public List<String> getWords(String text) {

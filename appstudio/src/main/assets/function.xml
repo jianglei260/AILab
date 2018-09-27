@@ -33,6 +33,14 @@
                 <Parameter name="oriention" defaultValue="1" type="java.lang.Integer">
                     <Option name="VERTICAL" value="1" type="java.lang.Integer"/>
                     <Option name="HORIZONTAL" value="0" type="java.lang.Integer"/>
+                    <Option name="VERTICAL" value="1" type="java.lang.Integer"/>
+                    <Option name="HORIZONTAL" value="0" type="java.lang.Integer"/>
+                    <Option name="VERTICAL" value="1" type="java.lang.Integer"/>
+                    <Option name="HORIZONTAL" value="0" type="java.lang.Integer"/>
+                    <Option name="VERTICAL" value="1" type="java.lang.Integer"/>
+                    <Option name="HORIZONTAL" value="0" type="java.lang.Integer"/>
+                    <Option name="VERTICAL" value="1" type="java.lang.Integer"/>
+                    <Option name="HORIZONTAL" value="0" type="java.lang.Integer"/>
                 </Parameter>
             </Mode>
         </Function>

@@ -27,6 +27,8 @@ public abstract class BaseRecyclerViewBinder extends RecyclerViewBinder<ItemWrap
     protected Function function;
     protected Variable variable;
     protected Switch expandSwitch;
+    protected String id;
+
 
     public BaseRecyclerViewBinder(RecyclerView recyclerView) {
         this.recyclerView = recyclerView;
@@ -45,17 +47,25 @@ public abstract class BaseRecyclerViewBinder extends RecyclerViewBinder<ItemWrap
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 setViewHolder(viewHolder);
-                if (isChecked){
+                if (isChecked) {
                     relativeLayout(R.id.params_layout).setVisibility(View.GONE);
-                }else {
+                } else {
                     relativeLayout(R.id.params_layout).setVisibility(View.VISIBLE);
                 }
             }
         });
     }
 
-    public void initMode(RelativeLayout layout, final LinearLayout parameterLayout, final List<Mode> modes) {
-        final TextView modeValue= textView(R.id.mode_value);
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void initMode(final String id, RelativeLayout layout, final LinearLayout parameterLayout, final List<Mode> modes) {
+        final TextView modeValue = textView(R.id.mode_value);
         modeValue.setText(modes.get(0).getName());
         textView(R.id.mode_name).setText("选项");
         final QMUIBottomSheet.BottomListSheetBuilder builder = new QMUIBottomSheet.BottomListSheetBuilder(recyclerView.getContext());
@@ -67,33 +77,33 @@ public abstract class BaseRecyclerViewBinder extends RecyclerViewBinder<ItemWrap
             public void onClick(QMUIBottomSheet dialog, View itemView, int position, String tag) {
                 dialog.dismiss();
                 modeValue.setText(modes.get(position).getName());
-                initParams(parameterLayout, modes.get(position).getParameters());
+                initParams(id, parameterLayout, modes.get(position).getParameters());
             }
         });
-        final QMUIBottomSheet qmuiBottomSheet= builder.build();
+        final QMUIBottomSheet qmuiBottomSheet = builder.build();
         modeValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!qmuiBottomSheet.isShowing()){
+                if (!qmuiBottomSheet.isShowing()) {
                     qmuiBottomSheet.show();
                 }
             }
         });
-        initParams(parameterLayout, modes.get(0).getParameters());
+        initParams(id, parameterLayout, modes.get(0).getParameters());
     }
 
-    public Context getContext(){
+    public Context getContext() {
         return recyclerView.getContext();
     }
 
-    public void initParams(LinearLayout container, List<Parameter> parameters) {
+    public void initParams(String id, LinearLayout container, List<Parameter> parameters) {
         int num = 0;
         container.removeAllViews();
         for (Parameter parameter : parameters) {
             if (parameter.getType() != null) {
-                ParameterAdapter parameterAdapter = ParameterAdapterManager.getInstance(getContext()).get(parameter);
+                ParameterAdapter parameterAdapter = ParameterAdapterManager.getInstance().get(id, parameter);
                 if (parameterAdapter == null) {
-                    parameterAdapter = ParameterAdapterManager.getInstance(getContext()).getDefault(parameter);
+                    parameterAdapter = ParameterAdapterManager.getInstance().getDefault(id, parameter);
                 }
                 View view = parameterAdapter.getView();
                 container.addView(view);

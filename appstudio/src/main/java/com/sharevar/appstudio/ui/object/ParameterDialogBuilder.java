@@ -13,6 +13,8 @@ import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.util.QMUIViewHelper;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
+import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 import com.sharevar.appstudio.R;
 import com.sharevar.appstudio.context.ProjectContext;
 import com.sharevar.appstudio.runtime.core.RuntimeContext;
@@ -27,24 +29,25 @@ public class ParameterDialogBuilder extends QMUIDialog.AutoResizeDialogBuilder {
     private EditText mEditText;
     private Parameter parameter;
     private RuntimeContext runtimeContext;
+
     public ParameterDialogBuilder(Context context) {
         super(context);
-        this.mContext=context;
+        this.mContext = context;
     }
 
-    public ParameterDialogBuilder runtimeContext(RuntimeContext runtimeContext){
-        this.runtimeContext=runtimeContext;
+    public ParameterDialogBuilder runtimeContext(RuntimeContext runtimeContext) {
+        this.runtimeContext = runtimeContext;
         return this;
     }
 
-    public ParameterDialogBuilder parameter(Parameter parameter){
-        this.parameter=parameter;
+    public ParameterDialogBuilder parameter(Parameter parameter) {
+        this.parameter = parameter;
         return this;
     }
 
     @Override
     public View onBuildContent(QMUIDialog dialog, ScrollView parent) {
-        LinearLayout layout = new LinearLayout(mContext);
+        QMUIGroupListView layout = new QMUIGroupListView(mContext);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setLayoutParams(new ScrollView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         int padding = QMUIDisplayHelper.dp2px(mContext, 20);
@@ -61,27 +64,46 @@ public class ParameterDialogBuilder extends QMUIDialog.AutoResizeDialogBuilder {
         return layout;
     }
 
-    public void buildFromOptions(LinearLayout parent){
-        List<Option> options=parameter.getOptions();
+    public void buildFromOptions(QMUIGroupListView parent) {
+        QMUIGroupListView.Section section = QMUIGroupListView.newSection(mContext).setTitle("可选项");
+        List<Option> options = parameter.getOptions();
         for (Option option : options) {
-            TextView textView = new TextView(mContext);
-            textView.setLineSpacing(QMUIDisplayHelper.dp2px(mContext, 4), 1.0f);
-            textView.setText(option.getName());
-            textView.setTextColor(ContextCompat.getColor(mContext, R.color.app_color_description));
-            textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            parent.addView(textView);
+//            TextView textView = new TextView(mContext);
+//            textView.setLineSpacing(QMUIDisplayHelper.dp2px(mContext, 4), 1.0f);
+//            textView.setText(option.getName());
+//            textView.setTextColor(ContextCompat.getColor(mContext, R.color.app_color_description));
+            QMUICommonListItemView normalItem = parent.createItemView(option.getName());
+            normalItem.setOrientation(QMUICommonListItemView.VERTICAL);
+            section.addItemView(normalItem, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
+        section.addTo(parent);
     }
 
-    public void buildFromVars(LinearLayout parent){
-        List<Variable> variables=runtimeContext.getAvailbleVars(parameter);
+    public void buildFromVars(QMUIGroupListView parent) {
+        List<Variable> variables = runtimeContext.getAvailbleVars(parameter);
+        QMUIGroupListView.Section section = QMUIGroupListView.newSection(mContext).setTitle("可选项");
+        if (variables == null)
+            return;
         for (Variable variable : variables) {
-            TextView textView = new TextView(mContext);
-            textView.setLineSpacing(QMUIDisplayHelper.dp2px(mContext, 4), 1.0f);
-            textView.setText(variable.getName());
-            textView.setTextColor(ContextCompat.getColor(mContext, R.color.app_color_description));
-            textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            parent.addView(textView);
+//            TextView textView = new TextView(mContext);
+//            textView.setLineSpacing(QMUIDisplayHelper.dp2px(mContext, 4), 1.0f);
+//            textView.setText(variable.getName());
+//            textView.setTextColor(ContextCompat.getColor(mContext, R.color.app_color_description));
+//            textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            QMUICommonListItemView normalItem = parent.createItemView(variable.getName());
+            normalItem.setOrientation(QMUICommonListItemView.VERTICAL);
+            section.addItemView(normalItem, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
+        section.addTo(parent);
     }
 }
