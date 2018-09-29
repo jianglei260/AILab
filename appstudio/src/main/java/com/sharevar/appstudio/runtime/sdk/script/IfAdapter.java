@@ -2,13 +2,11 @@ package com.sharevar.appstudio.runtime.sdk.script;
 
 import com.sharevar.appstudio.runtime.core.statement.EndStatement;
 import com.sharevar.appstudio.runtime.core.statement.Statement;
-import com.sharevar.appstudio.runtime.core.function.CodeBlock;
 import com.sharevar.appstudio.runtime.core.function.Function;
 import com.sharevar.appstudio.runtime.core.function.Mode;
 import com.sharevar.appstudio.runtime.core.function.Parameter;
-import com.sharevar.appstudio.runtime.core.function.Void;
 import com.sharevar.appstudio.runtime.sdk.FunctionAdapter;
-import com.sharevar.appstudio.ui.object.PlaygroundFragment;
+import com.sharevar.appstudio.ui.object.CodePlaygroundFragment;
 
 import java.util.Collection;
 import java.util.List;
@@ -51,9 +49,9 @@ public class IfAdapter extends FunctionAdapter {
     public List<Statement> generateStatement() {
         List<Statement> statements=super.generateStatement();
         Statement elseStatement=new Statement();
-        elseStatement.setBinderClass(PlaygroundFragment.ElseRecyclerViewBinder.class.getName());
+        elseStatement.setBinderClass(CodePlaygroundFragment.ElseRecyclerViewBinder.class.getName());
         EndStatement statement=new EndStatement();
-        statement.setBinderClass(PlaygroundFragment.EndRecyclerViewBinder.class.getName());
+        statement.setBinderClass(CodePlaygroundFragment.EndRecyclerViewBinder.class.getName());
         statements.add(elseStatement);
         statements.add(statement);
         return statements;

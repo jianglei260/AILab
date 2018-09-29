@@ -35,7 +35,7 @@ import com.sharevar.appstudio.ui.common.RecyclerViewBinder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlaygroundFragment extends BaseFragment {
+public class CodePlaygroundFragment extends BaseFragment {
     RecyclerView recyclerView;
     QMUITopBar mTopBar;
     List<ItemWrapper<Statement>> itemWrappers = new ArrayList<>();

@@ -3,7 +3,7 @@ package com.sharevar.appstudio.runtime.sdk;
 import com.sharevar.appstudio.runtime.core.statement.Statement;
 import com.sharevar.appstudio.runtime.core.function.Function;
 import com.sharevar.appstudio.runtime.core.RuntimeContext;
-import com.sharevar.appstudio.ui.object.PlaygroundFragment;
+import com.sharevar.appstudio.ui.object.CodePlaygroundFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public abstract class FunctionAdapter {
         this.statements=statements;
         Statement statement=new Statement();
         statement.setFunction(function);
-        statement.setBinderClass(PlaygroundFragment.DefaultRecyclerViewBinder.class.getName());
+        statement.setBinderClass(CodePlaygroundFragment.DefaultRecyclerViewBinder.class.getName());
         statements.add(statement);
         return statements;
     }

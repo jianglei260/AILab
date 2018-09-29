@@ -5,13 +5,13 @@ import com.sharevar.appstudio.ui.base.BaseActivity;
 
 
 public class PlaygroundActivity extends BaseActivity {
-    PlaygroundFragment fragment;
+    CodePlaygroundFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
-            fragment = new PlaygroundFragment();
+            fragment = new CodePlaygroundFragment();
             getSupportFragmentManager()
                     .beginTransaction()
                     .add(getContextViewId(), fragment, fragment.getClass().getSimpleName())
@@ -20,7 +20,7 @@ public class PlaygroundActivity extends BaseActivity {
         }
     }
 
-    public PlaygroundFragment getFragment() {
+    public CodePlaygroundFragment getFragment() {
         return fragment;
     }
 }
